@@ -1,6 +1,7 @@
 /* The simulation accepts only integer packets emitted by the unchanged Donghyun VM. */
 let D,brain,world,vm,running=false,runId=0,steps=0,elapsed=0,pending=0,token='',packet=[],queue=[],logs=[],samples=[],wallStart=0;
 const arity={1:1,2:4,3:1,4:2,5:1,6:1,7:1,8:1};
+const PLAYBACK_STRETCH=3; // Wall-clock presentation only; all simulated dt and CSV values stay unchanged.
 const assert=(ok,msg)=>{if(!ok)throw Error(msg);};
 const range=(x,a,b,name)=>assert(Number.isSafeInteger(x)&&x>=a&&x<=b,`${name}: ${a}~${b} 정수여야 한다.`);
 function log(text){logs.push({ms:world?.time||0,text});if(logs.length>300)logs.shift();}
@@ -87,7 +88,7 @@ function snapshot(type='frame',extra={}){
 }
 function fail(e){running=false;log('오류: '+e.message);snapshot('error',{error:e.message,line:e.line||vm?.currentLine,allSamples:samples});}
 function loop(id){
-  if(!running||id!==runId)return;const t=performance.now();
+  if(!running||id!==runId)return;const t=performance.now(),beforeElapsed=elapsed;
   try{
     if(pending){tick();pending-=20;}
     else{
@@ -98,8 +99,8 @@ function loop(id){
         else{if(token){const t=token;token='';accept(t);}assert(!packet.length,'명령 인수가 부족하다. 조작 규약을 확인하라.');if(!pending){running=false;log('프로그램 완료 · 동현이구나');}}
       }
     }
-    if(world.time%40===0||!running)snapshot(running?'frame':'done',running?{}:{allSamples:samples,wallMs:performance.now()-wallStart});
-    if(running)setTimeout(()=>loop(id),pending?Math.max(0,20-(performance.now()-t)):0);
+    if(world.time%20===0||!running)snapshot(running?'frame':'done',running?{}:{allSamples:samples,wallMs:performance.now()-wallStart});
+    if(running)setTimeout(()=>loop(id),elapsed>beforeElapsed?Math.max(0,20*PLAYBACK_STRETCH-(performance.now()-t)):0);
   }catch(e){fail(e);}
 }
 onmessage=({data:m})=>{

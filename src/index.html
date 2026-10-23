@@ -9,9 +9,12 @@
 <body>
 <header class="header">
   <a class="brand" href="#" aria-label="동현파 실험실로"><span class="brand-main">동현<span>파</span><sup>TM</sup></span><i class="brand-divider"></i><span class="brand-sub">WORM LAB<small>코드로 건드리는 작은 신경계</small></span></a>
-  <div class="edition">v0.2 <span>촉각 실험실</span><button id="theme" aria-label="밝은 화면과 어두운 화면 전환" aria-pressed="false">화면 전환</button></div>
+  <div class="edition">v0.3 <span>촉각 실험실</span><button id="theme" aria-label="밝은 화면과 어두운 화면 전환" aria-pressed="false">화면 전환</button></div>
 </header>
 <main>
+<!-- SERIES-NAV-START -->
+<nav class="series-strip" aria-label="동현 프로젝트 이동"><p class="series-context"><strong>동현의 작은 실험들</strong>하나의 언어, 두 개의 신경계</p><div class="series-links"><a class="series-item" data-series="lang" href="https://raspberry-kim.github.io/donghyun-lang/" aria-label="동현랭™ 언어 플레이그라운드로 이동"><span class="series-name">동현랭<sup>™</sup></span><span class="series-note">언어</span></a><a class="series-item" data-series="fly" href="https://raspberry-kim.github.io/donghyun-lab1/" aria-label="동현초™ 초파리 회로실험실로 이동"><span class="series-name">동현초<sup>™</sup></span><span class="series-note">초파리</span></a><span class="series-item" data-series="worm" aria-current="page"><span class="series-name">동현파<sup>™</sup></span><span class="series-note">선충</span></span></div></nav>
+<!-- SERIES-NAV-END -->
   <section class="intro">
     <div><div class="eyebrow">CONNECTOME × ESOTERIC LANGUAGE</div><h1>촉각 회로실험실: <span class="title-brand">동현<span>파</span><sup>TM</sup></span></h1><p>공개된 279뉴런 연결망에, 동현랭으로 작은 자극을 건넨다.</p></div>
     <div class="model-stamp"><strong>279 <span>뉴런</span></strong><strong>3,108 <span>층별 연결</span></strong><small>3층 공개 연결망 + 문헌 기반 촉각 모델</small></div>
@@ -25,7 +28,7 @@
         <div class="section-title"><h2><span>A</span> 관찰 공간</h2><span id="status" role="status">회로 불러오는 중</span></div>
         <div class="arena-wrap">
           <canvas id="arena" width="960" height="720" role="img" aria-label="왼쪽 예쁜꼬마선충과 가운데 소녀. 동현랭 명령으로 타격하고 촉각 회로 반응을 관찰한다."></canvas>
-          <div class="arena-hud"><span>SPECIMEN 02<br><small>C. elegans · 공개 연결망</small></span><span id="clock">0.00 s</span></div>
+          <div class="arena-hud"><span>SPECIMEN 02<br><small>C. elegans · 공개 연결망</small></span><span><span id="clock">0.00 s</span><small>모의 시간 · ⅓ 속도 재생</small></span></div>
           <div class="arena-floor"><span id="mode">출발 대기</span><span>640 × 480</span></div>
           <div id="welcome" class="welcome"><div class="eyebrow">A LITTLE TOUCH, A LITTLE RESPONSE</div><h3>잽 / 앞쪽 촉각</h3><p>가운데 소녀의 글러브에서 왼쪽 선충의 신경 반응까지, 코드 한 번으로 지켜보자.</p><button id="demo" disabled>실험 시작 ↗</button></div>
         </div>
@@ -36,10 +39,10 @@
           <div><span>AVA / AVD / AVE</span><small>후진 회로</small><strong id="reverse">0.000 <small>a.u.</small></strong></div>
           <div><span>AVB / PVC</span><small>전진 회로</small><strong id="forward">0.000 <small>a.u.</small></strong></div>
         </div>
-        <div class="section-title chart-title"><h2><span>B</span> 신경 활성 기록</h2><span id="chart-scale">Y축 0–0.10 a.u. · 10× 확대</span></div>
+        <div class="section-title chart-title"><h2><span>B</span> 신경 활성 기록</h2><span id="chart-scale">Y축 자동 범위 · 단위 a.u.</span></div>
         <canvas id="chart" width="960" height="235" role="img" aria-label="앞쪽·뒤쪽 감각, 후진·전진 회로와 강한 촉각 계열의 모델 활성도 그래프"></canvas>
         <div class="chart-legend"><span style="color:#bb8465">앞쪽 감각</span><span style="color:#608d87">뒤쪽 감각</span><span style="color:#ad675d">후진 회로</span><span style="color:#748a5a">전진 회로</span><span style="color:#877699">FLP / PVD</span></div>
-        <p class="model-note">글러브의 접촉이 감각 입력이 되고, 회로의 활성 차이가 선충의 꿈틀거림과 빛에 연결된다. 움직임과 활성 표시는 10배 확대하며, 그래프는 0–0.10 a.u. 범위를 보여 준다. ▲는 범위 초과이며 CSV에는 원값을 저장한다. 반짝이는 점은 회로 그룹을 표시한 도식으로, 실제 신경 위치·발화 횟수·통증·손상을 뜻하지 않는다.</p>
+        <p class="model-note">글러브의 접촉이 감각 입력이 되고, 회로의 활성 차이가 선충의 꿈틀거림과 빛에 연결된다. 몸과 빛의 반응 표시는 10배 확대하지만, 그래프와 CSV는 원값을 사용한다. 높은 기록창과 자동 Y축이 큰 봉우리까지 여유 있게 보여 주며 같은 실행에서는 축 범위를 줄이지 않는다. 반짝이는 점은 회로 그룹의 도식으로, 실제 신경 위치·발화 횟수·통증·손상을 뜻하지 않는다.</p>
       </div>
       <div class="coding-column">
         <section class="editor-panel">
@@ -57,7 +60,7 @@
     </div>
   </section>
   <section id="tab-protocol" class="tab-panel document" hidden>
-    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v0.2</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
+    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v0.3</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
     <div class="table-wrap"><table><thead><tr><th>명령</th><th>하는 일</th><th>인수</th></tr></thead><tbody>
       <tr><td>1</td><td>초기화</td><td>시드</td></tr>
       <tr><td>2</td><td>기술 시행</td><td>기술 번호 · 손(오른손 1 / 왼손 2) · 세기 0~100 · 접촉 위치 5~95%</td></tr>
@@ -87,7 +90,7 @@
     <!-- REFERENCE_DOCUMENTS -->
   </section>
 </main>
-<footer><span>동현파 v0.2 · 인하대학교 의과대학 교수 김동현</span><span>279뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
+<footer><span>동현파 v0.3 · 인하대학교 의과대학 교수 김동현</span><span>279뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
 <script>window.WORM_CONFIG={worker:"./worker.js",data:"./connectome.json"};</script>
 <script type="module" src="./app.js"></script>
 </body></html>

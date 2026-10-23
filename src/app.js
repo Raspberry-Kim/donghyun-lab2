@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s),canvas=$('#arena'),ctx=canvas.getContext('2d'),chart=$('#chart'),cc=chart.getContext('2d');
-let worker,ready=false,busy=false,state=null,samples=[],allSamples=[],lastSource='',data=null,workerURL='',lastHit=0,audio=null;
+let worker,ready=false,busy=false,state=null,samples=[],allSamples=[],lastSource='',data=null,workerURL='',lastHit=0,audio=null,chartPeak=0;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const colors={anterior:'#bb681e',posterior:'#198799',reverse:'#bd3b76',forward:'#66851b',harsh:'#7c55ab'};
 const glowColors={anterior:'#ffac36',posterior:'#33d9ff',reverse:'#ff4d9d',forward:'#c6f548',harsh:'#bf85ff'};
@@ -44,7 +44,7 @@ function pop(){
 function receive(m){
   if(m.state)state=m.state;if(m.samples)samples=m.samples;if(m.allSamples)allSamples=m.allSamples;
   if(m.type==='ready'){ready=true;status('회로 준비 완료');}
-  if(m.type==='done'){busy=false;status('실험 완료');$('#result').textContent=`${(state.time/1000).toFixed(1)}초 동안 ${state.hits}회 접촉했다. 다른 위치·세기·감각 경로로 다시 실험해 보자.`;}
+  if(m.type==='done'){busy=false;status('실험 완료');$('#result').textContent=`모의 시간 ${(state.time/1000).toFixed(1)}초 동안 ${state.hits}회 접촉했다. ⅓ 속도로 반응을 관찰했다.`;}
   if(m.type==='halted'){busy=false;status('중단됨');$('#result').textContent='오겡끼데스까. 실험을 멈췄다. 다시 실행하면 처음부터 시작한다.';}
   if(m.type==='error'){busy=false;status('실행 오류','error');$('#result').textContent=(m.line?m.line+'번 문장: ':'')+m.error;}
   if(state?.hits>lastHit&&state.sound)pop();lastHit=state?.hits||0;
@@ -68,7 +68,7 @@ async function init(){
   }catch(e){status('불러오기 오류','error');$('#result').textContent=e.message;}
 }
 function run(){
-  if(!ready||busy)return;lastSource=$('#code').value;allSamples=[];samples=[];drawChart();lastHit=0;busy=true;$('#welcome').hidden=true;status('실험 중','running');$('#result').textContent='동현랭 명령을 실행하고 있다.';controls();
+  if(!ready||busy)return;lastSource=$('#code').value;allSamples=[];samples=[];chartPeak=0;drawChart();lastHit=0;busy=true;$('#welcome').hidden=true;status('실험 중','running');$('#result').textContent='동현랭 명령을 실행하고 있다.';controls();
   const AC=window.AudioContext||window.webkitAudioContext;if(AC&&!audio)audio=new AC();if(audio?.state==='suspended')audio.resume().catch(()=>{});
   worker.postMessage({type:'run',code:lastSource});
 }
@@ -81,7 +81,7 @@ $('.file-label').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault
 $('#open').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(busy){$('#result').textContent='중단한 뒤 파일을 열 수 있다.';e.target.value='';return;}if(f.size>400000){$('#result').textContent='파일이 너무 크다. 400 KB 이하의 동현랭 코드를 열어라.';return;}const t=await f.text();if(t.length>100000){$('#result').textContent='코드는 100,000자까지다.';return;}$('#code').value=t;codeChanged();$('#result').textContent='코드를 불러왔다. 실행하면 새 실험으로 시작한다.';e.target.value='';};
 $('#csv').onclick=()=>{
   if(!allSamples.length)return;const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';
-  const meta=[['# model','동현파 0.2 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
+  const meta=[['# model','동현파 0.3 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
   download('donghyunpa-observations.csv','\ufeff'+meta.map(r=>r.map(esc).join(',')).join('\n')+'\n'+keys.join(',')+'\n'+allSamples.map(s=>keys.map(k=>esc(s[k])).join(',')).join('\n'),'text/csv;charset=utf-8');
 };
 function setup(c,context,h){
@@ -91,7 +91,11 @@ function setup(c,context,h){
 function circle(x,y,r,fill,stroke){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
 function ellipse(x,y,rx,ry,fill,stroke,rot=0){ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,0,Math.PI*2);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
 const mix=(a,b,t)=>a+(b-a)*t,smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
-const VIEW_GAIN=10,CHART_MAX=.1;
+const VIEW_GAIN=10;
+function chartRange(peak){
+  const needed=Math.max(.1,(Number.isFinite(peak)?Math.max(0,peak):0)*1.15);
+  return [.1,.2,.3,.4,.5,.6,.8,1,1.2].find(x=>x>=needed)||Math.ceil(needed*10)/10;
+}
 function wormPoint(p,s){
   const j=p*(s.q.length-1),i=Math.floor(j),q=mix(s.q[i]||0,s.q[Math.min(i+1,s.q.length-1)]||0,j-i);
   const neural=Math.min(65,VIEW_GAIN*((s.rates.reverse+s.rates.forward)*40+s.rates.harsh*18));
@@ -156,22 +160,36 @@ function worm(s,dark){
 }
 function bezierPoint(a,b,c,t){return {x:(1-t)*(1-t)*a.x+2*(1-t)*t*b.x+t*t*c.x,y:(1-t)*(1-t)*a.y+2*(1-t)*t*b.y+t*t*c.y};}
 function glovePath(type,progress,rest,target,contact){
-  // Finish direction is invariant to target height: horizontal jab, vertical uppercut,
-  // horizontal projected arc for hook, descending overhand, diagonal shovel.
-  const wind=type===2?{x:target.x+15,y:Math.min(435,target.y+105)}:
+  // Presentation-only timing: snap jab, driving straight, rising uppercut, planted hook.
+  const wind=type===2?{x:target.x+5,y:Math.min(445,Math.max(rest.y+48,target.y+135))}:
     type===8?{x:target.x+90,y:Math.min(435,target.y+85)}:
     type===7?{x:target.x+105,y:Math.max(82,target.y-95)}:
-    [4,6].includes(type)?{x:target.x+(type===6?155:125),y:target.y}:
+    type===4?{x:target.x+140,y:Math.max(98,target.y-70)}:
+    type===5?{x:target.x+85,y:Math.min(435,target.y+38)}:
+    type===6?{x:Math.min(565,rest.x+95),y:Math.min(435,target.y+45)}:
     {x:Math.max(rest.x+16,target.x+115),y:target.y};
   if(progress<.22){const t=smooth(progress/.22);return{x:mix(rest.x,wind.x,t),y:mix(rest.y,wind.y,t)};}
   if(progress<=contact){
-    const u=smooth((progress-.22)/(contact-.22));
-    if([4,6].includes(type)){const width=type===6?155:125;
-      return{x:target.x+width*Math.cos(u*Math.PI/2),y:target.y+(type===6?48:30)*Math.sin(u*Math.PI)**2};
+    const launch=type===1?contact-.12:.22,u=smooth((progress-launch)/(contact-launch));
+    if(type===4)return bezierPoint(wind,{x:target.x+90,y:Math.max(84,target.y-95)},target,u);
+    if(type===5)return bezierPoint(wind,{x:target.x+32,y:target.y+15},target,u);
+    if(type===6){
+      return{x:target.x+(wind.x-target.x)*Math.cos(u*Math.PI/2),y:target.y+(wind.y-target.y)*(1-u)-75*Math.sin(u*Math.PI)};
     }
-    if(type===2)return{x:target.x+15*(1-u)*(1-u),y:mix(wind.y,target.y,u)};
+    if(type===2)return{x:target.x+5*(1-u)*(1-u),y:mix(wind.y,target.y,u)};
     if(type===7)return bezierPoint(wind,{x:target.x-15,y:wind.y-15},target,u);
     return{x:mix(wind.x,target.x,u),y:mix(wind.y,target.y,u)};
+  }
+  if(type===1){const u=smooth((progress-contact)/.12);return{x:mix(target.x,rest.x,u),y:mix(target.y,rest.y,u)};}
+  if([3,4,5].includes(type)){
+    const hold=type===3?.87:.9,follow={x:Math.max(28,target.x-(type===3?45:type===4?24:18)),y:Math.min(435,target.y+(type===4?22:type===5?3:0))};
+    if(progress<=hold){const u=smooth((progress-contact)/.12);return{x:mix(target.x,follow.x,u),y:mix(target.y,follow.y,u)};}
+    const u=smooth((progress-hold)/(1-hold));return{x:mix(follow.x,rest.x,u),y:mix(follow.y,rest.y,u)};
+  }
+  if(type===2){
+    const apex={x:target.x-4,y:Math.max(76,target.y-32)},turn=contact+.1;
+    if(progress<turn){const u=smooth((progress-contact)/.1);return{x:mix(target.x,apex.x,u),y:mix(target.y,apex.y,u)};}
+    const u=smooth((progress-turn)/(1-turn));return bezierPoint(apex,{x:rest.x-40,y:rest.y+25},rest,u);
   }
   const t=smooth((progress-contact)/(1-contact));return bezierPoint(target,{x:target.x+60,y:target.y+35},rest,t);
 }
@@ -184,21 +202,22 @@ function draw(){
   ctx.strokeStyle=dark?'#c8b79238':'#baaa893f';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(87,442);ctx.lineTo(421,442);ctx.stroke();
   worm(s,dark);drawPixelGirl(ctx,s,punches,wormPoint,glovePath);
   const font=w<500?14:12;ctx.font=font+'px "Pretendard"';ctx.fillStyle=dark?'#d0c3ab':'#6e6356';ctx.textAlign='center';ctx.fillText('예쁜꼬마선충',180,68);ctx.fillText('동현랭 소녀',352,237);
-  if(s.action&&s.action.progress<1){ctx.fillStyle=dark?'#edd598':'#957044';ctx.font='13px "Nanum Gothic Coding"';ctx.fillText(s.action.name,480,226);ctx.font='11px "Nanum Gothic Coding"';ctx.fillText('위치 '+Math.round(s.action.position*100)+'% · 세기 '+Math.round(s.action.power*100),480,246);}
+  if(s.action&&s.action.progress<1){ctx.fillStyle=dark?'#edd598':'#957044';ctx.font='13px "Nanum Gothic Coding"';ctx.fillText(s.action.name,490,103);ctx.font='11px "Nanum Gothic Coding"';ctx.fillText('위치 '+Math.round(s.action.position*100)+'% · 세기 '+Math.round(s.action.power*100),490,123);}
 }
 function drawChart(){
-  const w=chart.getBoundingClientRect().width;if(w<1)return;const h=w<500?165:180,d=Math.min(devicePixelRatio||1,2);chart.width=Math.round(w*d);chart.height=Math.round(h*d);chart.style.height=h+'px';cc.setTransform(d,0,0,d,0,0);
-  const dark=document.documentElement.dataset.theme==='dark',left=40,right=w-12,top=14,bottom=h-26;cc.clearRect(0,0,w,h);cc.fillStyle=dark?'#201d18':'#fbf7ef';cc.fillRect(0,0,w,h);cc.font='10px "Nanum Gothic Coding"';cc.textAlign='right';
-  for(const y of [0,.025,.05,.075,.1]){const yy=bottom-y/CHART_MAX*(bottom-top);cc.strokeStyle=dark?'#c4b18b22':'#dacfb666';cc.lineWidth=1;cc.beginPath();cc.moveTo(left,yy);cc.lineTo(right,yy);cc.stroke();cc.fillStyle=dark?'#bdb19c':'#6e6356';cc.fillText(y.toFixed(3),left-7,yy+3);}
+  for(const sample of (allSamples.length?allSamples:samples))for(const key of Object.keys(colors))if(Number.isFinite(sample[key]))chartPeak=Math.max(chartPeak,sample[key]);
+  const ymax=chartRange(chartPeak);chart.dataset.yMax=String(ymax);chart.dataset.peak=String(chartPeak);
+  const w=chart.getBoundingClientRect().width;if(w<1)return;const h=w<500?340:440,d=Math.min(devicePixelRatio||1,2);chart.width=Math.round(w*d);chart.height=Math.round(h*d);chart.style.height=h+'px';cc.setTransform(d,0,0,d,0,0);
+  const dark=document.documentElement.dataset.theme==='dark',left=48,right=w-16,top=24,bottom=h-34;cc.clearRect(0,0,w,h);cc.fillStyle=dark?'#201d18':'#fbf7ef';cc.fillRect(0,0,w,h);cc.font='11px "Nanum Gothic Coding"';cc.textAlign='right';
+  for(let i=0;i<=4;i++){const y=ymax*i/4,yy=bottom-y/ymax*(bottom-top);cc.strokeStyle=dark?'#c4b18b22':'#dacfb666';cc.lineWidth=1;cc.beginPath();cc.moveTo(left,yy);cc.lineTo(right,yy);cc.stroke();cc.fillStyle=dark?'#bdb19c':'#6e6356';cc.fillText(y.toFixed(3),left-8,yy+4);}
   const end=Math.max(10000,state?.time||0),start=end-10000;
   for(let t=0;t<=10;t+=2){const x=left+(right-left)*t/10;cc.textAlign='center';cc.fillText(((start+t*1000)/1000).toFixed(0)+'s',x,h-8);}
-  let peak=0;cc.save();cc.beginPath();cc.rect(left,top,right-left,bottom-top);cc.clip();
-  for(const key of Object.keys(colors)){cc.strokeStyle=colors[key];cc.lineWidth=2;cc.beginPath();let first=true;for(const sample of samples){if(sample.ms<start)continue;peak=Math.max(peak,sample[key]);const x=left+(sample.ms-start)/10000*(right-left),y=bottom-sample[key]/CHART_MAX*(bottom-top);if(first){cc.moveTo(x,y);first=false;}else cc.lineTo(x,y);}cc.stroke();}
+  cc.save();cc.beginPath();cc.rect(left,top-2,right-left,bottom-top+4);cc.clip();
+  for(const key of Object.keys(colors)){cc.strokeStyle=colors[key];cc.lineWidth=2;cc.beginPath();let first=true;for(const sample of samples){if(sample.ms<start)continue;const x=left+(sample.ms-start)/10000*(right-left),y=bottom-sample[key]/ymax*(bottom-top);if(first){cc.moveTo(x,y);first=false;}else cc.lineTo(x,y);}cc.stroke();}
   cc.restore();
-  for(const key of Object.keys(colors)){let prev=-100;for(const sample of samples){if(sample.ms<start||sample[key]<=CHART_MAX)continue;const x=left+(sample.ms-start)/10000*(right-left);if(x-prev<12)continue;prev=x;cc.fillStyle=colors[key];cc.beginPath();cc.moveTo(x,top);cc.lineTo(x-3,top+5);cc.lineTo(x+3,top+5);cc.fill();}}
-  $('#chart-scale').textContent='Y축 0–0.10 a.u. · 10× 확대'+(peak>CHART_MAX?' · ▲ 범위 초과 / 실제 최대 '+peak.toFixed(3):'');
+  $('#chart-scale').textContent='Y축 0–'+ymax.toFixed(2)+' a.u. · 자동 범위 · 실험 최대 '+chartPeak.toFixed(3);
 }
-window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.2',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
+window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.3',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
 $('#run').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});
