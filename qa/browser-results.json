@@ -1,0 +1,126 @@
+{
+  "version": "0.2",
+  "examples": [
+    {
+      "id": "jab",
+      "time": 5240,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "uppercut",
+      "time": 5920,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "straight",
+      "time": 5920,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "hook",
+      "time": 5720,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "body",
+      "time": 6200,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "swing",
+      "time": 9580,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "overhand",
+      "time": 6560,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "shovel",
+      "time": 6160,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "onetwo",
+      "time": 6540,
+      "hits": 4,
+      "status": "실험 완료"
+    },
+    {
+      "id": "one-two",
+      "time": 4180,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "double-jab",
+      "time": 5000,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "jab-upper",
+      "time": 4280,
+      "hits": 2,
+      "status": "실험 완료"
+    },
+    {
+      "id": "jab-cross-hook",
+      "time": 5240,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "body-head",
+      "time": 5520,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "upper-hook-cross",
+      "time": 5480,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "double-hook",
+      "time": 5580,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "overhand-body",
+      "time": 5500,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "shovel-finish",
+      "time": 5640,
+      "hits": 3,
+      "status": "실험 완료"
+    },
+    {
+      "id": "eight-punch",
+      "time": 11020,
+      "hits": 8,
+      "status": "실험 완료"
+    },
+    {
+      "id": "blank",
+      "time": 0,
+      "hits": 0,
+      "status": "실험 완료"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,164 @@
+{
+  "tests": 47,
+  "data": {
+    "neurons": 279,
+    "sourceRecords": 5863,
+    "sourceLayerRecords": [
+      1031,
+      1639,
+      3193
+    ],
+    "uniqueLayerEdges": [
+      517,
+      888,
+      1703
+    ],
+    "selfEdges": [
+      3,
+      0,
+      0
+    ]
+  },
+  "examples": {
+    "jab": {
+      "time": 5240,
+      "hits": 2,
+      "maxReverse": 0.03231502840288756,
+      "maxForward": 0,
+      "minKnockback": -26.488692739888638
+    },
+    "uppercut": {
+      "time": 5920,
+      "hits": 2,
+      "maxReverse": 0.04555922328053575,
+      "maxForward": 0.09104493436761582,
+      "minKnockback": -32.37506890430834
+    },
+    "straight": {
+      "time": 5920,
+      "hits": 2,
+      "maxReverse": 0.04551140017965108,
+      "maxForward": 0.07453897194124251,
+      "minKnockback": -29.421913745802243
+    },
+    "hook": {
+      "time": 5720,
+      "hits": 2,
+      "maxReverse": 0.04781714132328726,
+      "maxForward": 0.00013179261112957264,
+      "minKnockback": -26.467619017202587
+    },
+    "body": {
+      "time": 6200,
+      "hits": 2,
+      "maxReverse": 0.02084187677758617,
+      "maxForward": 0.06389463935776753,
+      "minKnockback": -48.63901242308132
+    },
+    "swing": {
+      "time": 9580,
+      "hits": 3,
+      "maxReverse": 0.06993116872485873,
+      "maxForward": 0,
+      "minKnockback": -33.51291592406323
+    },
+    "overhand": {
+      "time": 6560,
+      "hits": 2,
+      "maxReverse": 0.12497828140024458,
+      "maxForward": 0,
+      "minKnockback": -50.77399598066131
+    },
+    "shovel": {
+      "time": 6160,
+      "hits": 2,
+      "maxReverse": 0.04830063110477823,
+      "maxForward": 0,
+      "minKnockback": -26.479722371222017
+    },
+    "onetwo": {
+      "time": 6540,
+      "hits": 4,
+      "maxReverse": 0.06351028327025283,
+      "maxForward": 0.0970998482387583,
+      "minKnockback": -65.28038103666978
+    },
+    "one-two": {
+      "time": 4180,
+      "hits": 2,
+      "maxReverse": 0.05829827642314062,
+      "maxForward": 0,
+      "minKnockback": -49.160222767065235
+    },
+    "double-jab": {
+      "time": 5000,
+      "hits": 3,
+      "maxReverse": 0.06990516628293947,
+      "maxForward": 0,
+      "minKnockback": -52.756653318523014
+    },
+    "jab-upper": {
+      "time": 4280,
+      "hits": 2,
+      "maxReverse": 0.06637502332336308,
+      "maxForward": 0,
+      "minKnockback": -49.86084451729671
+    },
+    "jab-cross-hook": {
+      "time": 5240,
+      "hits": 3,
+      "maxReverse": 0.0786093355934035,
+      "maxForward": 0,
+      "minKnockback": -55.89610360346221
+    },
+    "body-head": {
+      "time": 5520,
+      "hits": 3,
+      "maxReverse": 0.07317297878385116,
+      "maxForward": 0.08230438191869274,
+      "minKnockback": -58.34220875986132
+    },
+    "upper-hook-cross": {
+      "time": 5480,
+      "hits": 3,
+      "maxReverse": 0.07314436518977564,
+      "maxForward": 0,
+      "minKnockback": -59.24438709060054
+    },
+    "double-hook": {
+      "time": 5580,
+      "hits": 3,
+      "maxReverse": 0.07013217594573169,
+      "maxForward": 0.05668670440238824,
+      "minKnockback": -54.74937653810661
+    },
+    "overhand-body": {
+      "time": 5500,
+      "hits": 3,
+      "maxReverse": 0.09405409239852051,
+      "maxForward": 0.08190110496311515,
+      "minKnockback": -53.10552659972596
+    },
+    "shovel-finish": {
+      "time": 5640,
+      "hits": 3,
+      "maxReverse": 0.08719973390587377,
+      "maxForward": 0.06557663400810568,
+      "minKnockback": -59.159565827130685
+    },
+    "eight-punch": {
+      "time": 11020,
+      "hits": 8,
+      "maxReverse": 0.09165921425618202,
+      "maxForward": 0.08031238303974675,
+      "minKnockback": -55.57736443735738
+    },
+    "blank": {
+      "time": 0,
+      "hits": 0,
+      "maxReverse": null,
+      "maxForward": null,
+      "minKnockback": null
+    }
+  }
+}
