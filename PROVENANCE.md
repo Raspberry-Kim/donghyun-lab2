@@ -1,10 +1,10 @@
 # 동현파™ v0.3: 데이터 계보와 모델의 경계
 
-동현파는 동현랭만으로 조작하는 예쁜꼬마선충 촉각 회로 실험실이다. 공개 유전체를 언급하는 생물학적 배경과 이 앱에서 실제로 계산하는 연결망·모델을 구별한다.
+동현파는 동현랭으로만 조작하는 예쁜꼬마선충 촉각 회로실험실이다. 이 문서에는 데이터가 어디서 왔고 어떻게 다듬었는지, 계산 모델이 무엇을 가정하고 어디까지를 다루는지 적어 두었다. 선충의 유전체 이야기와 이 앱이 실제로 계산하는 연결망은 따로 구분해 설명한다.
 
 ## 원 데이터
 
-**CoMuNeLab, C.ELEGANS MULTIPLEX CONNECTOME**을 사용했다. 원 저장소는 279뉴런과 전기적 접합·화학적 monadic 접합·화학적 polyadic 접합의 세 층을 제공하며, 모든 층을 무방향·무가중치라고 명시한다. 아래 표의 단일·다중 접합은 각각 원 자료의 monadic·polyadic 층을 가리키며, 단일 시냅스 경로·다중 시냅스 경로라는 뜻이 아니다. [원 데이터와 조건](https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome)
+**CoMuNeLab, C.ELEGANS MULTIPLEX CONNECTOME**을 사용했다. 원 저장소는 279개 뉴런과 전기적 접합·화학적 monadic 접합·화학적 polyadic 접합의 세 층을 제공하며, 모든 층을 무방향·무가중치라고 명시한다. 아래 표의 단일·다중 접합은 각각 원 자료의 monadic·polyadic 층을 가리키며, 단일 시냅스 경로·다중 시냅스 경로라는 뜻이 아니다. [원 데이터와 조건](https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome)
 
 - **고정 커밋:** `9d6d48af4eb6acef31ad9999e22fbd27c2ce210b`
 - **원 파일:** `celegans_connectome_nodes.txt`, `celegans_connectome_layers.txt`, `celegans_connectome_multiplex.edges`
