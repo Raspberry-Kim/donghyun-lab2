@@ -1,21 +1,54 @@
-// Original chibi pixel artwork. Body 25%, head 62%, gloves 70% of v0.1.
+// Hand-placed pixel artwork: 1 cell = 1 layer pixel = 2 canvas units, 95% of v0.3.
+// Lean, stretch, after-images and sparkle exaggerate the punch on screen only.
 // Elastic arms alone bridge the distance to the specimen. No simulation input here.
 const spriteLayer=document.createElement('canvas');spriteLayer.width=320;spriteLayer.height=240;
 const spriteContext=spriteLayer.getContext('2d');
+const GIRL_ROWS=["...ooooo............ooooo...", "..oHHHHHo..........oHHHHHo..", ".oHHHHHHHo........oHHHHHHHo.", "oHHHhhHHHHooooooooHHHhhHHHHo", "oHHHhHHHHHoHHHHHHoHHHhHHHHHo", "oHHHHHHHHHHHhhHHHHHHHHHHHHHo", "oHHHHHHHHHhhHHHHHHHHHHHHHHHo", ".oHHHHHHHHHHHHHHHHHHHHHHHHo.", "..oHHHHHHHHHHHHHHHHHHHHHHo..", "...oooHHHHHHHHHHHHHHHHooo...", ".....oHHHHHHHHHHHHHHHHo.....", "....oHHHHHHHHHHHHHHHHHHo....", "....oHHHsssHHHssssHHHHHo....", "....oHsswesssswessssHHHo....", ".....osseesssseessssHHo.....", ".....oHseesssseessssHHo.....", ".....obbssssssssbbssHHo.....", "......ossssmmssssssHHo......", ".......osssssssssssHo.......", "........ossssssssHHo........", ".........ooHsssHHoo.........", "...........osssso...........", "..........oossssoo..........", ".........oDccccccDo.........", ".........oDDDccDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", "........oDyyyyyyyyyo........", ".......oDDDDDDDDDDDDo.......", ".......oDDdDDDDDDdDDo.......", "......oDDDdDDDDDDdDDDo......", ".....oDDDDdDDDDDDdDDDDo.....", "....oDDDDDdDDDDDDdDDDDDo....", "....oDDDDDdDDDDDDdDDDDDo....", "...oDDDDDDdDDDDDDdDDDDDDo...", "....oooooossoooossoooooo....", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", "........oosso..ossoo........", ".......oSSSSSooSSSSSo.......", "........ooooo..ooooo........"];
+const GLOVE_ROWS=["...oooooo....", ".ooLLLLFFoooo", "oFLLFFFFFKoCo", "oFKKKFFFFKoCo", "oFFFFFFFFKoCo", "oFFFFFFFFKoCo", ".oFFFFFFKKoCo", "..oKKKKKKoooo", "...oooooo...."];
+const GIRL_COLORS={o:'#63483a',H:'#4b382e',h:'#775242',s:'#efc7a6',e:'#49392f',w:'#fbf4db',b:'#dc9c83',m:'#a87362',c:'#f5ead1',D:'#d48a78',d:'#ad6e62',y:'#edc776',S:'#f4e8cd'};
+function pixelCanvas(rows,colors,x0=0,y0=0,w=rows[0].length-x0,h=rows.length-y0){
+  const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');
+  for(let r=0;r<h;r++)for(let k=0;k<w;k++){const color=colors[rows[y0+r]?.[x0+k]];if(color){g.fillStyle=color;g.fillRect(k,r,1,1);}}
+  return c;
+}
+const girlParts={upper:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,0,28,29),skirt:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,29,28,8),
+  legFront:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,37,14,8),legBack:pixelCanvas(GIRL_ROWS,GIRL_COLORS,14,37,14,8)};
+const gloveSprites=['#d98072','#dea47f'].map(F=>pixelCanvas(GLOVE_ROWS,{o:'#63483a',F,L:'#f5c4ab',K:'#b86b5d',C:'#f4e7ce'}));
 function drawPixelGirl(main,s,punches,wormPoint,glovePath){
-  const g=spriteContext;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,320,240);g.setTransform(.5,0,0,.5,0,0);g.imageSmoothingEnabled=false;
+  const g=spriteContext;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,320,240);g.imageSmoothingEnabled=false;
   const a=s.action,t=a?.progress||0,active=!!a&&t<1,type=a?.type||1,env=active?Math.sin(Math.PI*t)**2:0;
-  const drive=active&&type===3?(t<.22?t/.22:t<.87?1:(1-t)/.13):0;
-  const cx=352-(type===4?0:type===3?10*drive:type===6?9*env:4*env),crouch=([2,5,8].includes(type)?(type===2?7:type===5?9:4):1)*env,sy=306+crouch,hy=282+crouch;
-  const ink='#63483a',hair='#4b382e',skin='#efc7a6',dress='#d48a78';
-  const poly=(pts,fill,stroke=ink,w=2)=>{g.beginPath();pts.forEach((p,i)=>i?g.lineTo(...p):g.moveTo(...p));g.closePath();g.fillStyle=fill;g.fill();if(stroke){g.strokeStyle=stroke;g.lineWidth=w;g.lineJoin='miter';g.stroke();}};
-  const rect=(x,y,w,h,color)=>{g.fillStyle=color;g.fillRect(Math.round(x/2)*2,Math.round(y/2)*2,w,h);};
-  const shoulders=[{x:cx-5,y:sy},{x:cx+5,y:sy}],rest=[{x:cx-23,y:sy-5},{x:cx-7,y:sy-9}],hand=(a?.hand||1)-1;
+  const drive=active&&type===3?(t<.22?t/.22:t<.87?1:(1-t)/.13):0,K=.95,ground=351;
+  const cx=352-(type===4?0:type===3?10*drive:type===6?9*env:4*env),crouch=([2,5,8].includes(type)?(type===2?7:type===5?9:4):1)*env;
+  const contact=punches[type].contact,hand=(a?.hand||1)-1,ink='#63483a',skin='#efc7a6';
+  // Wind back, then throw the shoulders toward the target and settle again.
+  let lean=0;
+  if(active){
+    if(t<.22)lean=-1.6*smooth(t/.22);
+    else if(t<contact)lean=mix(-1.6,3.2,smooth((t-.22)/Math.max(.01,contact-.22)));
+    else lean=3.2*Math.pow(Math.max(0,1-(t-contact)/Math.max(.01,1-contact)),1.4);
+  }
+  const P=v=>Math.round(v),bx=P(cx/2)-14,top=P(ground/2)-44,dy=P(crouch*K/2),lx=P(lean),step=type===4?0:P(env*2.4);
+  const sc=p=>({x:cx+(p.x-cx)*K,y:ground+(p.y-ground)*K});
+  const sy=306+crouch,shoulders=[{x:cx-5,y:sy},{x:cx+5,y:sy}].map(sc).map(p=>({x:p.x-lx*2,y:p.y}));
+  const rest=[{x:cx-23,y:sy-5},{x:cx-7,y:sy-9}].map(sc).map(p=>({x:p.x-lx*2,y:p.y}));
   const at=wormPoint(a?.position??.2,s),target={x:at.x+at.r+7,y:at.y};
-  const ends=rest.map((p,i)=>active&&i===hand?glovePath(type,t,p,target,punches[type].contact):p);
+  const ends=rest.map((p,i)=>active&&i===hand?glovePath(type,t,p,target,contact):p);
+  const brush=(pts,size,color)=>{g.fillStyle=color;for(let i=1;i<pts.length;i++){const p=pts[i-1],q=pts[i],n=Math.max(1,Math.ceil(Math.hypot(q.x-p.x,q.y-p.y)/2));
+    for(let j=0;j<=n;j++){const x=mix(p.x,q.x,j/n)/2,y=mix(p.y,q.y,j/n)/2;g.fillRect(P(x-size/2),P(y-size/2),size,size);}}};
+  function glove(index,end,strike,alpha=1,ghost=false){
+    const rotation=strike&&[2,8].includes(type)?Math.PI/2:strike&&[4,7].includes(type)?-.55:0;
+    const linger=[3,4,5].includes(type)&&t>contact&&t<.85;
+    const swell=strike&&!ghost?1+1.15*(linger?1:Math.exp(-Math.pow((t-contact)/(type===1?.09:.16),2))):1;
+    let stretch=1,angle=0;
+    if(strike&&t>.22&&t<contact){const p=glovePath(type,Math.max(0,t-.03),rest[index],target,contact),speed=Math.hypot(end.x-p.x,end.y-p.y);
+      angle=Math.atan2(end.y-p.y,end.x-p.x);stretch=1+Math.min(.42,speed/120);} // Stretch along the flight.
+    else if(strike&&t>=contact&&t<contact+.05)stretch=.82; // A brief squash on contact.
+    g.save();g.globalAlpha=alpha;g.translate(end.x/2,end.y/2);g.rotate(angle);g.scale(stretch,1/Math.sqrt(stretch));g.rotate(rotation-angle);g.scale(swell*K,swell*K);
+    g.drawImage(gloveSprites[index],-6.5,-4.5);g.restore();
+  }
   function arm(index){
     const start=shoulders[index],end=ends[index],strike=active&&index===hand;
-    let elbow={x:cx+(index?8:-9),y:sy+12};
+    let elbow=sc({x:cx+(index?8:-9),y:sy+12});elbow.x-=lx*2;
     if(strike){
       const extension=Math.min(1,Math.hypot(end.x-rest[index].x,end.y-rest[index].y)/40),d=Math.hypot(end.x-start.x,end.y-start.y);
       let pose;
@@ -29,39 +62,37 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
       } // Hook keeps a 90-degree elbow; swing uses a wider, straighter arm.
       elbow={x:elbow.x+(pose.x-elbow.x)*extension,y:elbow.y+(pose.y-elbow.y)*extension};
     }
-    g.lineJoin='round';g.lineCap='round';g.strokeStyle=ink;g.lineWidth=7;g.beginPath();g.moveTo(start.x,start.y);g.lineTo(elbow.x,elbow.y);g.lineTo(end.x,end.y);g.stroke();g.strokeStyle=skin;g.lineWidth=4;g.stroke();
-    const rotation=strike&&[2,8].includes(type)?Math.PI/2:strike&&[4,7].includes(type)?-.55:0;
-    g.save();g.translate(end.x,end.y);g.rotate(rotation);
-    const contact=punches[type].contact,linger=[3,4,5].includes(type)&&t>contact&&t<.85;
-    const swell=strike?1+1.15*(linger?1:Math.exp(-Math.pow((t-contact)/(type===1?.09:.16),2))):1;
-    g.scale(swell,swell);
-    poly([[-10,-8],[5,-8],[10,-4],[10,5],[5,9],[-9,9],[-12,4],[-12,-4]],index===0?'#d98072':'#dea47f');
-    rect(-9,-6,10,3,'#f5c4ab');rect(7,-3,3,8,'#b86b5d');rect(10,-5,5,11,'#f4e7ce');g.restore();
+    brush([start,elbow,end],4,ink);brush([start,elbow,end],2,skin);
+    glove(index,end,strike);
   }
-  // Leg and dress dimensions are one quarter of the original.
-  for(const [side,x]of [[-1,cx-9-(type===4?0:env*3)],[1,cx+9]]){
-    g.strokeStyle=ink;g.lineWidth=5;g.beginPath();g.moveTo(cx+side*4,326);g.lineTo(x+side*2,339);g.lineTo(x,349);g.stroke();g.strokeStyle=skin;g.lineWidth=3;g.stroke();
-    poly([[x-5,347],[x+3,347],[x+5,351],[x-6,351]],'#f4e8cd');
-  }
+  // Legs stay planted; the front foot steps in and the upper body leans into the punch.
+  g.drawImage(girlParts.legFront,bx-step,top+37);g.drawImage(girlParts.legBack,bx+14,top+37);
   arm(1);
-  poly([[cx-6,304+crouch],[cx+6,304+crouch],[cx+6,315],[cx+10,329],[cx+7,332],[cx-9,332],[cx-11,329],[cx-6,315]],dress);
-  rect(cx-6,316,12,2,'#edc776');rect(cx-6,322,2,8,'#ad6e62');rect(cx+4,323,2,7,'#ad6e62');
-  rect(cx-3,298+crouch,6,8,skin);poly([[cx-5,306+crouch],[cx,310+crouch],[cx+3,306+crouch]],'#f5ead1',null);
-  const bun=(x,y)=>{rect(x-8,y-6,18,14,hair);rect(x-5,y-9,12,20,hair);rect(x-5,y-6,8,4,'#775242');};
-  bun(cx-18,hy-16);bun(cx+18,hy-16);
-  poly([[cx-15,hy-12],[cx-10,hy-17],[cx+10,hy-17],[cx+15,hy-12],[cx+15,hy+10],[cx+10,hy+15],[cx-10,hy+15],[cx-15,hy+10]],hair);
-  poly([[cx-12,hy-5],[cx-7,hy-10],[cx+10,hy-7],[cx+12,hy-2],[cx+12,hy+8],[cx+7,hy+13],[cx-7,hy+13],[cx-12,hy+8]],skin,null);
-  rect(cx-12,hy-10,22,5,hair);rect(cx-12,hy-5,5,8,hair);rect(cx-2,hy-8,5,8,hair);rect(cx+10,hy-8,5,12,hair);
-  rect(cx-7,hy+3,3,5,'#49392f');rect(cx+3,hy+3,3,5,'#49392f');rect(cx-7,hy+3,2,2,'#fbf4db');
-  rect(cx-12,hy+8,5,3,'#dc9c83');rect(cx+7,hy+8,5,3,'#dc9c83');rect(cx-1,hy+9,3,2,'#a87362');
+  g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);
+  const face=(c,r,color,w=1,h=1)=>{g.fillStyle=color;g.fillRect(bx-lx+c,top+dy+r,w,h);};
+  if(active&&Math.abs(t-contact)<.07){ // Effort face: > <
+    face(8,13,skin,2,3);face(14,13,skin,2,3);
+    for(const [c,r]of [[8,13],[9,14],[8,15],[15,13],[14,14],[15,15]])face(c,r,'#49392f');
+  }
+  if(active&&t>.18&&t<contact+.12){face(11,17,'#a87362',2,2);face(11,18,'#7d5546',2,1);} // Small shout.
   arm(0);if(active&&hand===1)arm(1);
-  // A short trajectory tail differentiates direction without becoming a control.
-  if(active&&t>.24&&t<punches[type].contact+.1){
-    const spec=punches[type];g.save();g.lineCap='round';
+  // After-images and short speed lines show the direction without becoming a control.
+  if(active&&t>.24&&t<contact+.1){
+    if(t<contact)for(let i=3;i>=1;i--){const u=t-i*.035;if(u<.22)continue;glove(hand,glovePath(type,u,rest[hand],target,contact),true,.34-i*.08,true);}
     for(let i=0;i<4;i++){const u=t-.1+i*.025,v=u+.025;if(u<.22)continue;
-      const p=glovePath(type,u,rest[hand],target,spec.contact),q=glovePath(type,v,rest[hand],target,spec.contact);
-      g.strokeStyle=`rgba(179,119,55,${.25+i*.16})`;g.lineWidth=3+i;g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke();
-    }g.restore();
+      const p=glovePath(type,u,rest[hand],target,contact),q=glovePath(type,v,rest[hand],target,contact);
+      brush([p,q],1+(i>1),`rgba(179,119,55,${.25+i*.16})`);
+      if(i>1){const n=Math.hypot(q.x-p.x,q.y-p.y)||1,ox=-(q.y-p.y)/n*14,oy=(q.x-p.x)/n*14,line=`rgba(179,119,55,${.12+i*.08})`;
+        brush([{x:p.x+ox,y:p.y+oy},{x:q.x+ox,y:q.y+oy}],1,line);brush([{x:p.x-ox,y:p.y-oy},{x:q.x-ox,y:q.y-oy}],1,line);}
+    }
+  }
+  // A small pixel sparkle at the moment of contact.
+  if(active&&t>=contact&&t<contact+.09){
+    const e=ends[hand],age=(t-contact)/.09,r=P(3+age*5),x=P(e.x/2-7),y=P(e.y/2);
+    g.globalAlpha=1-age*.7;g.fillStyle='#edc776';
+    for(let i=2;i<=r;i++){g.fillRect(x-i,y,1,1);g.fillRect(x,y-i,1,1);g.fillRect(x,y+i,1,1);}
+    for(let i=2;i<=P(r*.6);i++){g.fillRect(x-i,y-i,1,1);g.fillRect(x-i,y+i,1,1);}
+    g.fillStyle='#fff3c4';g.fillRect(x-1,y-1,2,2);g.globalAlpha=1;
   }
   main.save();main.imageSmoothingEnabled=false;main.drawImage(spriteLayer,0,0,640,480);main.restore();
 }

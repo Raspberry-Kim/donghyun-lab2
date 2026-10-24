@@ -108,7 +108,7 @@ npm test
 npm run build
 ```
 
-`src/`나 Markdown 문서를 고친 뒤 빌드하면 루트의 `index.html`, `동현파-v0.3.html`, 분리 파일판 `dist/`가 새로 만들어진다. 생성된 HTML을 직접 고치면 다음 빌드에서 덮어써지니, 원본을 고치는 편이 좋다.
+`src/`나 Markdown 문서를 고친 뒤 빌드하면 루트의 `index.html`, `동현파-v0.4.html`, 분리 파일판 `dist/`가 새로 만들어진다. 생성된 HTML을 직접 고치면 다음 빌드에서 덮어써지니, 원본을 고치는 편이 좋다.
 
 ## 출처와 이용 조건
 
