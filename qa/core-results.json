@@ -1,5 +1,5 @@
 {
-  "tests": 47,
+  "tests": 50,
   "data": {
     "neurons": 279,
     "sourceRecords": 5863,
@@ -21,137 +21,158 @@
   },
   "examples": {
     "jab": {
-      "time": 5240,
+      "time": 5080,
       "hits": 2,
-      "maxReverse": 0.03231502840288756,
+      "maxReverse": 0.034380126716472795,
       "maxForward": 0,
       "minKnockback": -26.488692739888638
     },
     "uppercut": {
-      "time": 5920,
+      "time": 5740,
       "hits": 2,
       "maxReverse": 0.04555922328053575,
-      "maxForward": 0.09104493436761582,
+      "maxForward": 0.09321903765782846,
       "minKnockback": -32.37506890430834
     },
     "straight": {
-      "time": 5920,
+      "time": 5720,
       "hits": 2,
-      "maxReverse": 0.04551140017965108,
+      "maxReverse": 0.045511332836739304,
       "maxForward": 0.07453897194124251,
       "minKnockback": -29.421913745802243
     },
     "hook": {
-      "time": 5720,
+      "time": 5540,
       "hits": 2,
       "maxReverse": 0.026204246693321276,
-      "maxForward": 0.012344787412567258,
+      "maxForward": 0.013207788015193763,
       "minKnockback": -26.467619017202587
     },
     "body": {
-      "time": 6200,
+      "time": 6020,
       "hits": 2,
-      "maxReverse": 0.02084187677758617,
-      "maxForward": 0.06389463935776753,
-      "minKnockback": -48.63901242308132
+      "maxReverse": 0.021587657244751788,
+      "maxForward": 0.06920557145299777,
+      "minKnockback": -48.31630945746506
     },
     "swing": {
-      "time": 9580,
+      "time": 9220,
       "hits": 3,
-      "maxReverse": 0.06993116872485873,
+      "maxReverse": 0.06921773853335385,
       "maxForward": 0,
       "minKnockback": -33.51291592406323
     },
     "overhand": {
-      "time": 6560,
+      "time": 6360,
       "hits": 2,
-      "maxReverse": 0.12497828140024458,
+      "maxReverse": 0.12496845153502047,
       "maxForward": 0,
-      "minKnockback": -50.77399598066131
+      "minKnockback": -50.48291118426684
     },
     "shovel": {
-      "time": 6160,
+      "time": 5980,
       "hits": 2,
-      "maxReverse": 0.04830063110477823,
+      "maxReverse": 0.046931754674958526,
       "maxForward": 0,
       "minKnockback": -26.479722371222017
     },
     "onetwo": {
-      "time": 6540,
-      "hits": 4,
-      "maxReverse": 0.06351028327025283,
+      "time": 8660,
+      "hits": 6,
+      "maxReverse": 0.09238075770263117,
       "maxForward": 0.0970998482387583,
-      "minKnockback": -65.28038103666978
+      "minKnockback": -64.15182250135194
     },
     "one-two": {
-      "time": 4180,
-      "hits": 2,
-      "maxReverse": 0.05829827642314062,
+      "time": 7740,
+      "hits": 6,
+      "maxReverse": 0.07076601356300098,
       "maxForward": 0,
-      "minKnockback": -49.160222767065235
+      "minKnockback": -53.707616342511926
     },
     "double-jab": {
-      "time": 5000,
-      "hits": 3,
-      "maxReverse": 0.06990516628293947,
-      "maxForward": 0,
-      "minKnockback": -52.756653318523014
+      "time": 7600,
+      "hits": 6,
+      "maxReverse": 0.060716721085417175,
+      "maxForward": 0.0938877591236264,
+      "minKnockback": -50.98821323579106
     },
     "jab-upper": {
-      "time": 4280,
-      "hits": 2,
-      "maxReverse": 0.06637502332336308,
+      "time": 8280,
+      "hits": 6,
+      "maxReverse": 0.0864714102113716,
       "maxForward": 0,
-      "minKnockback": -49.86084451729671
+      "minKnockback": -54.88672565620038
     },
     "jab-cross-hook": {
-      "time": 5240,
-      "hits": 3,
-      "maxReverse": 0.0786093355934035,
+      "time": 9040,
+      "hits": 7,
+      "maxReverse": 0.07691262390839888,
       "maxForward": 0,
-      "minKnockback": -55.89610360346221
+      "minKnockback": -60.79928472608266
     },
     "body-head": {
-      "time": 5520,
-      "hits": 3,
-      "maxReverse": 0.07317297878385116,
-      "maxForward": 0.08230438191869274,
-      "minKnockback": -58.34220875986132
+      "time": 9840,
+      "hits": 7,
+      "maxReverse": 0.09207427078671397,
+      "maxForward": 0.08730201268769702,
+      "minKnockback": -58.540506852962885
     },
     "upper-hook-cross": {
-      "time": 5480,
-      "hits": 3,
-      "maxReverse": 0.07314436518977564,
+      "time": 9640,
+      "hits": 7,
+      "maxReverse": 0.07051319990709466,
       "maxForward": 0,
-      "minKnockback": -59.24438709060054
+      "minKnockback": -57.88096663531878
     },
     "double-hook": {
-      "time": 5580,
-      "hits": 3,
-      "maxReverse": 0.07013217594573169,
+      "time": 10680,
+      "hits": 8,
+      "maxReverse": 0.07605540003822013,
       "maxForward": 0.05668670440238824,
-      "minKnockback": -54.74937653810661
+      "minKnockback": -62.47738232830438
     },
     "overhand-body": {
-      "time": 5500,
-      "hits": 3,
-      "maxReverse": 0.09405409239852051,
-      "maxForward": 0.08190110496311515,
-      "minKnockback": -53.10552659972596
+      "time": 10740,
+      "hits": 8,
+      "maxReverse": 0.10689724592742078,
+      "maxForward": 0.07883541748671015,
+      "minKnockback": -58.78785060492527
     },
     "shovel-finish": {
-      "time": 5640,
-      "hits": 3,
-      "maxReverse": 0.08719973390587377,
-      "maxForward": 0.06557663400810568,
-      "minKnockback": -59.159565827130685
+      "time": 10760,
+      "hits": 8,
+      "maxReverse": 0.08193619481940279,
+      "maxForward": 0.06852543421273194,
+      "minKnockback": -59.391831470925446
+    },
+    "swing-storm": {
+      "time": 12860,
+      "hits": 9,
+      "maxReverse": 0.12310971797460456,
+      "maxForward": 0.0670404309323555,
+      "minKnockback": -53.05473552829429
+    },
+    "front-back": {
+      "time": 11580,
+      "hits": 9,
+      "maxReverse": 0.09148832367031197,
+      "maxForward": 0.10844608396275915,
+      "minKnockback": -59.89683913091377
+    },
+    "power-ladder": {
+      "time": 13040,
+      "hits": 10,
+      "maxReverse": 0.11466972493921068,
+      "maxForward": 0.050726713088900505,
+      "minKnockback": -75.14104942061707
     },
     "eight-punch": {
-      "time": 11020,
-      "hits": 8,
-      "maxReverse": 0.09165921425618202,
+      "time": 12800,
+      "hits": 10,
+      "maxReverse": 0.0938084472745875,
       "maxForward": 0.08031238303974675,
-      "minKnockback": -55.57736443735738
+      "minKnockback": -65.43404030455784
     },
     "blank": {
       "time": 0,
