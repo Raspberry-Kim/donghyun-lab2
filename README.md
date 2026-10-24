@@ -8,8 +8,9 @@
 - **[동현랭 플레이그라운드](https://raspberry-kim.github.io/donghyun-lang/)**: 소녀가 알아듣는 언어의 문법과 예제를 볼 수 있다.
 - **[동현랭 GitHub](https://github.com/Raspberry-Kim/donghyun-lang)**: 언어의 실행기 소스와 명세가 있다.
 - **[동현초™ · 초파리 회로실험실](https://raspberry-kim.github.io/donghyun-lab1/)**: 같은 디자인으로 만든 첫 번째 실험실이다.
+- **[동현빌™ · 마을 유행 실험실](https://raspberry-kim.github.io/donghyun-lab3/)**: 실제로 기록된 469명의 만남 위에서 홍역·백일해·인플루엔자의 유행과 접종을 실험하는 세 번째 실험실이다.
 
-세 사이트는 상단의 **동현의 작은 실험들** 메뉴로 이어져 있다. 지금 보고 있는 곳은 노란색으로 표시된다.
+네 사이트는 상단의 **동현의 작은 실험들** 메뉴로 이어져 있다. 지금 보고 있는 곳은 노란색으로 표시된다.
 
 ## 시작하기
 
