@@ -1,10 +1,10 @@
 // Hand-placed pixel artwork: 1 cell = 1 layer pixel = 2 canvas units, 95% of v0.3.
-// v0.5: buns 20% smaller, a bow on the right bun, big red sneakers.
+// v0.6: round buns, a small bow between them, an H-line mini skirt and big red sneakers.
 // Lean, stretch, after-images and sparkle exaggerate the punch on screen only.
 // Elastic arms alone bridge the distance to the specimen. No simulation input here.
 const spriteLayer=document.createElement('canvas');spriteLayer.width=320;spriteLayer.height=240;
 const spriteContext=spriteLayer.getContext('2d');
-const GIRL_ROWS=["............................", ".....ooo.......oo...ooo.....", "....oHHHo.....oqBoooBqHo....", "...oHHHHHo.ooooBBBkBBBHHo...", "..oHHhhHHHoHHHHBBrkrBBHHHo..", "..oHHhHHHHHHhhHHBBHBBHHHHo..", "..oHHHHHHHhhHHHHrHHHrHHHHo..", "...oHHHHHHHHHHHHHHHHHHHHo...", "....oHHHHHHHHHHHHHHHHHHo....", ".....oHHHHHHHHHHHHHHHHo.....", ".....oHHHHHHHHHHHHHHHHo.....", "....oHHHHHHHHHHHHHHHHHHo....", "....oHHHsssHHHssssHHHHHo....", "....oHsswesssswessssHHHo....", ".....osseesssseessssHHo.....", ".....oHseesssseessssHHo.....", ".....obbssssssssbbssHHo.....", "......ossssmmssssssHHo......", ".......osssssssssssHo.......", "........ossssssssHHo........", ".........ooHsssHHoo.........", "...........osssso...........", "..........oossssoo..........", ".........oDccccccDo.........", ".........oDDDccDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", "........oDyyyyyyyyyo........", ".......oDDDDDDDDDDDDo.......", ".......oDDdDDDDDDdDDo.......", "......oDDDdDDDDDDdDDDo......", ".....oDDDDdDDDDDDdDDDDo.....", "....oDDDDDdDDDDDDdDDDDDo....", "....oDDDDDdDDDDDDdDDDDDo....", "...oDDDDDDdDDDDDDdDDDDDDo...", "....oooooossoooossoooooo....", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", ".......ooRLLRooRLLRoo.......", "......orRRRRRoorRRRRRo......", "......oWWWWWWooWWWWWWWo.....", ".......ooooooo.ooooooo......"];
+const GIRL_ROWS=["...ooooo............ooooo...", "..ooHHHoo..........ooHHHoo..", ".ooHhHHHo..........oHHhHHoo.", ".oHhHHHHHo.oooooo.oHHhHHHHo.", ".oHhHHHHHooHHHHHHooHHhHHHHo.", ".oHHHHHHHoHHhhHBqHqHHHHHHHo.", ".ooHHHHHoHhhHHHBBkBBHHHHHoo.", "..ooHHHooHHHHHHrHHHroHHHoo..", "....oooHHHHHHHHHHHHHHooo....", ".....oHHHHHHHHHHHHHHHHo.....", ".....oHHHHHHHHHHHHHHHHo.....", "....oHHHHHHHHHHHHHHHHHHo....", "....oHHHsssHHHssssHHHHHo....", "....oHsswesssswessssHHHo....", ".....osseesssseessssHHo.....", ".....oHseesssseessssHHo.....", ".....obbssssssssbbssHHo.....", "......ossssmmssssssHHo......", ".......osssssssssssHo.......", "........ossssssssHHo........", ".........ooHsssHHoo.........", "...........osssso...........", "..........oossssoo..........", ".........oDccccccDo.........", ".........oDDDccDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", ".........oDDDDDDDDo.........", "........oDyyyyyyyyyo........", "........oDDDDDDDDDDo........", "........oDDdDDDDdDDo........", "........oDDdDDDDdDDo........", "........oDDdDDDDdDDo........", "........oDDdDDDDdDDo........", ".........ossoooosso.........", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", ".........osso..osso.........", ".......ooRLLRooRLLRoo.......", "......orRRRRRoorRRRRRo......", "......oWWWWWWooWWWWWWWo.....", ".......ooooooo.ooooooo......"];
 const GLOVE_ROWS=["...oooooo....", ".ooLLLLFFoooo", "oFLLFFFFFKoCo", "oFKKKFFFFKoCo", "oFFFFFFFFKoCo", "oFFFFFFFFKoCo", ".oFFFFFFKKoCo", "..oKKKKKKoooo", "...oooooo...."];
 const GIRL_COLORS={o:'#63483a',H:'#4b382e',h:'#775242',s:'#efc7a6',e:'#49392f',w:'#fbf4db',b:'#dc9c83',m:'#a87362',c:'#f5ead1',D:'#d48a78',d:'#ad6e62',y:'#edc776',S:'#f4e8cd',R:'#cf6157',r:'#a64b44',L:'#f4e8cd',W:'#f4e8cd',B:'#cf6157',k:'#a64b44',q:'#ef9a8b'};
 function pixelCanvas(rows,colors,x0=0,y0=0,w=rows[0].length-x0,h=rows.length-y0){
@@ -12,8 +12,8 @@ function pixelCanvas(rows,colors,x0=0,y0=0,w=rows[0].length-x0,h=rows.length-y0)
   for(let r=0;r<h;r++)for(let k=0;k<w;k++){const color=colors[rows[y0+r]?.[x0+k]];if(color){g.fillStyle=color;g.fillRect(k,r,1,1);}}
   return c;
 }
-const girlParts={upper:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,0,28,29),skirt:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,29,28,8),
-  legFront:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,37,14,8),legBack:pixelCanvas(GIRL_ROWS,GIRL_COLORS,14,37,14,8)};
+const girlParts={upper:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,0,28,29),skirt:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,29,28,6),
+  legFront:pixelCanvas(GIRL_ROWS,GIRL_COLORS,0,35,14,10),legBack:pixelCanvas(GIRL_ROWS,GIRL_COLORS,14,35,14,10)};
 const gloveSprites=['#d98072','#dea47f'].map(F=>pixelCanvas(GLOVE_ROWS,{o:'#63483a',F,L:'#f5c4ab',K:'#b86b5d',C:'#f4e7ce'}));
 function drawPixelGirl(main,s,punches,wormPoint,glovePath){
   const g=spriteContext;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,320,240);g.imageSmoothingEnabled=false;
@@ -67,7 +67,7 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
     glove(index,end,strike);
   }
   // Legs stay planted; the front foot steps in and the upper body leans into the punch.
-  g.drawImage(girlParts.legFront,bx-step,top+37);g.drawImage(girlParts.legBack,bx+14,top+37);
+  g.drawImage(girlParts.legFront,bx-step,top+35);g.drawImage(girlParts.legBack,bx+14,top+35);
   arm(1);
   g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);
   const face=(c,r,color,w=1,h=1)=>{g.fillStyle=color;g.fillRect(bx-lx+c,top+dy+r,w,h);};
