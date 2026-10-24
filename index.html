@@ -1804,7 +1804,8 @@ function draw(){
   ctx.strokeStyle=dark?'#c8b79238':'#baaa893f';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(87,442);ctx.lineTo(421,442);ctx.stroke();
   worm(s,dark);drawPixelGirl(ctx,s,punches,wormPoint,glovePath);
   const font=w<500?14:12;ctx.font=font+'px "Pretendard"';ctx.fillStyle=dark?'#d0c3ab':'#6e6356';ctx.textAlign='center';ctx.fillText('예쁜꼬마선충',180,68);ctx.fillText('동현랭 소녀',352,237);ctx.restore();
-  if(s.action&&s.action.progress<1){ctx.fillStyle=dark?'#edd598':'#957044';ctx.font='13px "Nanum Gothic Coding"';ctx.fillText(s.action.name,490,103);ctx.font='11px "Nanum Gothic Coding"';ctx.fillText('위치 '+Math.round(s.action.position*100)+'% · 세기 '+Math.round(s.action.power*100),490,123);}
+  if(s.action&&s.action.progress<1){const hud=document.querySelector('.arena-hud>span:last-child'),cr=canvas.getBoundingClientRect(),ay=hud?Math.max(103,Math.ceil((hud.getBoundingClientRect().bottom-cr.top)*640/cr.width)+16):103; // mobile: keep the action label below the HTML clock
+    ctx.fillStyle=dark?'#edd598':'#957044';ctx.font='13px "Nanum Gothic Coding"';ctx.fillText(s.action.name,490,ay);ctx.font='11px "Nanum Gothic Coding"';ctx.fillText('위치 '+Math.round(s.action.position*100)+'% · 세기 '+Math.round(s.action.power*100),490,ay+20);}
 }
 function drawChart(){
   for(const sample of (allSamples.length?allSamples:samples))for(const key of Object.keys(colors))if(Number.isFinite(sample[key]))chartPeak=Math.max(chartPeak,sample[key]);
