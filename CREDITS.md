@@ -13,16 +13,16 @@
 - **연결망 원 연구:** Chen BL, Hall DH, Chklovskii DB. Wiring optimization can relate neuronal structure and function. PNAS 103(12), 4723–4728 (2006). http://www.pnas.org/content/103/12/4723.abstract
 - **다층 네트워크 도구:** De Domenico M, Porter MA, Arenas A. MuxViz: A Tool for Multilayer Analysis and Visualization of Networks. Journal of Complex Networks 3(2), 159–176 (2015). http://comnet.oxfordjournals.org/content/3/2/159
 
-원 데이터를 지원하고 개발한 European Commission FET-Proactive PLEXMATH (Grant No. 317614)와 Alephsys Lab의 고지는 `data/SOURCE.md`에 원문 그대로 남겨 두었다. 연결망의 구조와 한계를 살펴볼 때는 Varshney LR, Chen BL, Paniagua E, Hall DH, Chklovskii DB. Structural Properties of the Caenorhabditis elegans Neuronal Network. PLOS Computational Biology 7(2), e1001066 (2011)도 참고했다. 다만 동현파가 실제로 가져온 파일은 이 논문이 아니라 위 CoMuNeLab 저장소에서 왔다. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001066
+원 데이터를 지원하고 개발한 European Commission FET-Proactive PLEXMATH (Grant No. 317614)와 Alephsys Lab의 고지는 `data/SOURCE.md`에 원문 그대로 남겨 두었다. 연결망의 구조와 한계를 살펴볼 때는 Varshney LR, Chen BL, Paniagua E, Hall DH, Chklovskii DB. Structural Properties of the *Caenorhabditis elegans* Neuronal Network. PLOS Computational Biology 7(2), e1001066 (2011)도 참고했다. 다만 동현파가 실제로 가져온 파일은 이 논문이 아니라 위 CoMuNeLab 저장소에서 왔다. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001066
 
 라이선스가 따로 적혀 있지 않은 다른 미러의 연결 파일이나 WormAtlas 이미지는 가져오지 않았다.
 
 ## 촉각과 유전체, 동작에 관해 참고한 자료
 
-- **고전 촉각 회로:** Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S. The neural circuit for touch sensitivity in Caenorhabditis elegans. Journal of Neuroscience 5(4), 956–964 (1985). https://www.jneurosci.org/content/5/4/956
-- **기계감각 리뷰:** Schafer WR. Mechanosensory molecules and circuits in C. elegans. Pflügers Archiv 467(1), 39–48 (2015; 온라인 출판 2014-07-23). 촉각 세포, 기계감각 통로, 앞뒤 반응, 강한 촉각의 구분을 참고했다. https://pmc.ncbi.nlm.nih.gov/articles/PMC4281349/
-- **촉각의 시간적 부호화:** The C. elegans Touch Receptor Neurons Encode Temporal Features of Mechanical Stimuli. Scientific Reports (2019). 반복 입력을 어떻게 다룰지 참고했다. 앱의 적응 상수는 이 논문에서 잰 값이 아니다. https://www.nature.com/articles/s41598-019-41349-0
-- **유전체 해독의 역사:** NHGRI, 1998: Genome of Roundworm C. elegans Sequenced. 유전체가 공개되었다는 사실과, 이 앱이 계산하는 신경 연결망은 서로 다른 이야기다. https://www.genome.gov/25520394/online-education-kit-1998-genome-of-roundworm-c-elegans-sequenced
+- **고전 촉각 회로:** Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S. The neural circuit for touch sensitivity in *Caenorhabditis elegans*. Journal of Neuroscience 5(4), 956–964 (1985). https://www.jneurosci.org/content/5/4/956
+- **기계감각 리뷰:** Schafer WR. Mechanosensory molecules and circuits in *C. elegans*. Pflügers Archiv 467(1), 39–48 (2015; 온라인 출판 2014-07-23). 촉각 세포, 기계감각 통로, 앞뒤 반응, 강한 촉각의 구분을 참고했다. https://pmc.ncbi.nlm.nih.gov/articles/PMC4281349/
+- **촉각의 시간적 부호화:** The *C. elegans* Touch Receptor Neurons Encode Temporal Features of Mechanical Stimuli. Scientific Reports (2019). 반복 입력을 어떻게 다룰지 참고했다. 앱의 적응 상수는 이 논문에서 잰 값이 아니다. https://www.nature.com/articles/s41598-019-41349-0
+- **유전체 해독의 역사:** NHGRI, 1998: Genome of Roundworm *C. elegans* Sequenced. 유전체가 공개되었다는 사실과, 이 앱이 계산하는 신경 연결망은 서로 다른 이야기다. https://www.genome.gov/25520394/online-education-kit-1998-genome-of-roundworm-c-elegans-sequenced
 - **기술 이름과 궤적:** Evolve MMA, 6 Unconventional Power Punches You Should Add To Your Boxing Arsenal. 오버핸드와 쇼벨 훅의 이름, 주먹이 지나가는 방향만 참고했다. 사진이나 영상, 문장은 가져오지 않았고 실제 복싱 교육용 동작 분석도 아니다. https://evolve-mma.com/blog/6-unconventional-power-punches-you-should-add-to-your-boxing-arsenal/
 
 복싱 기술마다 선충의 실제 신경 반응이 확인된 것은 아니다. 동현파는 주먹이 닿은 것을 촉각 입력으로 바꾸고, 문헌을 바탕으로 제약을 둔 활성도 모델을 계산한 다음, 그 결과를 과장된 몸 연출과 이어 붙였다.
