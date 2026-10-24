@@ -169,3 +169,5 @@ a.series-item:focus-visible{outline:3px solid #a5791c;outline-offset:3px}
 /* Editor code follows Donghyun-lang at every width: 15px/1.7, and 13.5px on phones (<=480px). */
 #code,#lines{font-size:15px;line-height:1.7}
 @media(max-width:480px){#code,#lines{font-size:13.5px}}
+/* Mobile: keep the italic C. elegans line under SPECIMEN 02. */
+@media(max-width:780px){.arena-hud>span:first-child small{display:block;font-size:10px}}
