@@ -76,6 +76,10 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
     for(const [c,r]of [[8,13],[9,14],[8,15],[15,13],[14,14],[15,15]])face(c,r,'#49392f');
   }
   if(active&&t>.18&&t<contact+.12){face(11,17,'#a87362',2,2);face(11,18,'#7d5546',2,1);} // Small shout.
+  if(active&&hand===0){ // Right-hand punch: the left arm stays folded against the chest, in view.
+    const fold=q=>{const v=sc(q);return {x:v.x-lx*2,y:v.y};},start=shoulders[1],elbow=fold({x:cx-1,y:sy+15}),end=fold({x:cx-13,y:sy+4});
+    brush([start,elbow,end],4,ink);brush([start,elbow,end],2,skin);glove(1,end,false);
+  }
   arm(0);if(active&&hand===1)arm(1);
   // After-images and short speed lines show the direction without becoming a control.
   if(active&&t>.24&&t<contact+.1){
