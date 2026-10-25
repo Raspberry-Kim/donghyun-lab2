@@ -106,6 +106,7 @@ function loop(id){
 }
 onmessage=({data:m})=>{
   try{
+    if(m.type==='speed'){slow=!!m.slow;return;}
     if(m.type==='init'){D=m.data;resetWorld(1);snapshot('ready');return;}
     if(m.type==='halt'){
       const h=new Donghyun.VM('나는 동현이냐?\n오겡끼데스까\n동현이구나');h.run();
