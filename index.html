@@ -1577,12 +1577,16 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
   arm(1);
   g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);
   const face=(c,r,color,w=1,h=1)=>{g.fillStyle=color;g.fillRect(bx-lx+c,top+dy+r,w,h);};
-  if(active&&Math.abs(t-contact)<.07){ // Effort face: > <
-    face(8,13,skin,2,3);face(14,13,skin,2,3);
-    for(const [c,r]of [[8,13],[9,14],[8,15],[15,13],[14,14],[15,15]])face(c,r,'#49392f');
-  }
-  if(active&&t>.18&&t<contact+.12){face(11,17,'#a87362',2,2);face(11,18,'#7d5546',2,1);} // Small shout.
+  const expression=()=>{
+    if(active&&Math.abs(t-contact)<.07){ // Effort face: > <
+      face(8,13,skin,2,3);face(14,13,skin,2,3);
+      for(const [c,r]of [[8,13],[9,14],[8,15],[15,13],[14,14],[15,15]])face(c,r,'#49392f');
+    }
+    if(active&&t>.18&&t<contact+.12){face(11,17,'#a87362',2,2);face(11,18,'#7d5546',2,1);} // Small shout.
+  };
+  expression();
   arm(0);if(active&&hand===1)arm(1);
+  if(active&&hand===0){g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);expression();} // Right-hand punch: the far right arm stays behind her head and body.
   // After-images and short speed lines show the direction without becoming a control.
   if(active&&t>.24&&t<contact+.1){
     if(t<contact)for(let i=3;i>=1;i--){const u=t-i*.035;if(u<.22)continue;glove(hand,glovePath(type,u,rest[hand],target,contact),true,.34-i*.08,true);}
