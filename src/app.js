@@ -6,7 +6,20 @@ const glowColors={anterior:'#ffac36',posterior:'#33d9ff',reverse:'#ff4d9d',forwa
 const fallback={time:0,hits:0,action:null,q:Array(19).fill(0),v:Array(19).fill(0),phase:0,contraction:0,mechanical:0,knockback:0,theatrics:0,impulse:0,lastPosition:.2,lastPower:0,contact:false,mode:'출발 대기',rates:{anterior:0,posterior:0,reverse:0,forward:0,harsh:0,active:0}};
 $('#theme').onclick=()=>{const dark=document.documentElement.dataset.theme!=='dark';document.documentElement.dataset.theme=dark?'dark':'light';$('#theme').setAttribute('aria-pressed',String(dark));draw();drawChart();};
 for(const ex of examples){const o=document.createElement('option');o.value=ex.id;o.textContent=ex.title;$('#example').append(o);}
-function codeChanged(){const n=$('#code').value.split('\n').length;$('#line-count').textContent=n+'줄';$('#lines').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');}
+// 동현랭 편집기와 같은 문법 색 표시
+const DH_TOKEN=/(ㅋㅋ.*$)|(나는 동현이냐\?|동현이구나)|(오겡끼데스까)|(신중동역|신중동|뭉치)|(뿡뿡뿡|뿡뿡|포동이)|(꽥꽥)|(동+현아)|(동+현)|(도오*옹)|(ㅠ+)|(뚱띠|또치)/g;
+const DH_CLS=[null,'t-cmt','t-frame','t-halt','t-ctl','t-out','t-in','t-assign','t-var','t-num','t-minus','t-op'];
+const dhEsc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function dhLine(line){let html='',last=0;line.replace(DH_TOKEN,(m,...g)=>{const idx=g[g.length-2];html+=dhEsc(line.slice(last,idx));const k=g.slice(0,11).findIndex(x=>x!==undefined)+1;html+=`<span class="${DH_CLS[k]}">${dhEsc(m)}</span>`;last=idx+m.length;return m;});return html+dhEsc(line.slice(last));}
+const dhCode=document.getElementById('code');
+const dhArea=document.createElement('div');dhArea.className='code-area';
+const dhHl=document.createElement('div');dhHl.id='hl';dhHl.setAttribute('aria-hidden','true');
+dhCode.parentNode.insertBefore(dhArea,dhCode);dhArea.append(dhHl,dhCode);
+function dhSync(){dhHl.scrollTop=dhCode.scrollTop;dhHl.scrollLeft=dhCode.scrollLeft;}
+function dhMetrics(){const cs=getComputedStyle(dhCode);for(const p of ['paddingTop','paddingRight','paddingBottom','paddingLeft','fontFamily','fontSize','lineHeight','tabSize','letterSpacing'])dhHl.style[p]=cs[p];}
+function dhHighlight(){dhMetrics();dhHl.innerHTML=dhCode.value.split('\n').map(l=>`<span class="ln">${dhLine(l)||' '}</span>`).join('')+'<span class="ln"> </span>';dhSync();}
+dhCode.addEventListener('scroll',dhSync);addEventListener('resize',dhHighlight);
+function codeChanged(){const n=$('#code').value.split('\n').length;$('#line-count').textContent=n+'줄';$('#lines').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');dhHighlight();}
 function selectExample(){
   const ex=examples.find(e=>e.id===$('#example').value);$('#code').value=ex.code;$('#example-note').textContent=ex.note;codeChanged();
   $('#welcome h3').textContent=ex.title.slice(5);
@@ -81,7 +94,7 @@ $('.file-label').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault
 $('#open').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(busy){$('#result').textContent='중단한 뒤 파일을 열 수 있다.';e.target.value='';return;}if(f.size>400000){$('#result').textContent='파일이 너무 크다. 400 KB 이하의 동현랭 코드를 열어라.';return;}const t=await f.text();if(t.length>100000){$('#result').textContent='코드는 100,000자까지다.';return;}$('#code').value=t;codeChanged();$('#result').textContent='코드를 불러왔다. 실행하면 새 실험으로 시작한다.';e.target.value='';};
 $('#csv').onclick=()=>{
   if(!allSamples.length)return;const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';
-  const meta=[['# model','동현파 0.6 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
+  const meta=[['# model','동현파 0.8 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
   download('donghyunpa-observations.csv','\ufeff'+meta.map(r=>r.map(esc).join(',')).join('\n')+'\n'+keys.join(',')+'\n'+allSamples.map(s=>keys.map(k=>esc(s[k])).join(',')).join('\n'),'text/csv;charset=utf-8');
 };
 function setup(c,context,h){
@@ -221,7 +234,7 @@ function drawChart(){
   cc.restore();
   $('#chart-scale').textContent='Y축 0–'+ymax.toFixed(2)+' a.u. · 자동 범위 · 실험 최대 '+chartPeak.toFixed(3);
 }
-window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.6',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
+window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.8',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
 $('#run').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});
