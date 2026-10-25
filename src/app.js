@@ -17,7 +17,9 @@ const dhHl=document.createElement('div');dhHl.id='hl';dhHl.setAttribute('aria-hi
 dhCode.parentNode.insertBefore(dhArea,dhCode);dhArea.append(dhHl,dhCode);
 function dhSync(){dhHl.scrollTop=dhCode.scrollTop;dhHl.scrollLeft=dhCode.scrollLeft;}
 function dhMetrics(){const cs=getComputedStyle(dhCode);for(const p of ['paddingTop','paddingRight','paddingBottom','paddingLeft','fontFamily','fontSize','lineHeight','tabSize','letterSpacing'])dhHl.style[p]=cs[p];}
-function dhHighlight(){dhMetrics();dhHl.innerHTML=dhCode.value.split('\n').map(l=>`<span class="ln">${dhLine(l)||' '}</span>`).join('')+'<span class="ln"> </span>';dhSync();}
+let dhCur=0;
+function dhMark(n){if(n===dhCur)return;dhCur=n;dhHl.querySelectorAll('.ln.cur').forEach(e=>e.classList.remove('cur'));if(n>0)dhHl.children[n-1]?.classList.add('cur');}
+function dhHighlight(){dhCur=0;dhMetrics();dhHl.innerHTML=dhCode.value.split('\n').map(l=>`<span class="ln">${dhLine(l)||' '}</span>`).join('')+'<span class="ln"> </span>';dhSync();}
 dhCode.addEventListener('scroll',dhSync);addEventListener('resize',dhHighlight);
 function codeChanged(){const n=$('#code').value.split('\n').length;$('#line-count').textContent=n+'줄';$('#lines').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');dhHighlight();}
 function selectExample(){
@@ -46,7 +48,7 @@ function openReference(hash){
 document.querySelectorAll('a[href^="#"]:not(#data-download)').forEach(a=>a.addEventListener('click',e=>{if(openReference(a.getAttribute('href'))){e.preventDefault();try{history.replaceState(null,'',a.getAttribute('href'));}catch{}}}));
 addEventListener('hashchange',()=>openReference(location.hash));if(location.hash)openReference(location.hash);
 $('.brand').onclick=e=>{e.preventDefault();document.querySelector('[data-tab="lab"]').click();window.scrollTo({top:0,behavior:'instant'});};
-function controls(){for(const id of ['run','demo'])$('#'+id).disabled=!ready||busy;$('#halt').disabled=!busy;$('#code').readOnly=busy;$('#example').disabled=busy;}
+function controls(){for(const id of ['run','demo','slow'])$('#'+id).disabled=!ready||busy;$('#halt').disabled=!busy;$('#code').readOnly=busy;$('#example').disabled=busy;}
 function status(text,kind=''){$('#status').textContent=text;$('#status').dataset.kind=kind;}
 function renderLog(rows){
   $('#log').replaceChildren(...rows.map(r=>{const li=document.createElement('li'),t=document.createElement('time');t.textContent=(r.ms/1000).toFixed(2).padStart(5,'0');li.append(t,document.createTextNode(r.text));return li;}));
@@ -75,17 +77,17 @@ async function init(){
       const codeResponse=await fetch(cfg.worker);if(!codeResponse.ok)throw Error('계산 실행기를 읽지 못했다.');
       workerURL=URL.createObjectURL(new Blob([await codeResponse.text()],{type:'text/javascript'}));
     }
-    worker=new Worker(workerURL);worker.onmessage=e=>receive(e.data);worker.onerror=e=>{busy=false;status('실행 환경 오류','error');$('#result').textContent=e.message||'이 브라우저에서 계산 스레드를 열지 못했다.';controls();};
+    worker=new Worker(workerURL);worker.onmessage=e=>{dhMark(e.data.slow&&e.data.type==='frame'?e.data.phys:0);receive(e.data);};worker.onerror=e=>{busy=false;status('실행 환경 오류','error');$('#result').textContent=e.message||'이 브라우저에서 계산 스레드를 열지 못했다.';controls();};
     worker.postMessage({type:'init',data});
     $('#data-download').href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));
   }catch(e){status('불러오기 오류','error');$('#result').textContent=e.message;}
 }
-function run(){
-  if(!ready||busy)return;lastSource=$('#code').value;allSamples=[];samples=[];chartPeak=0;drawChart();lastHit=0;busy=true;$('#welcome').hidden=true;status('실험 중','running');$('#result').textContent='동현랭 명령을 실행하고 있다.';controls();
+function run(e){const slowRun=e===true;
+  if(!ready||busy)return;lastSource=$('#code').value;allSamples=[];samples=[];chartPeak=0;drawChart();lastHit=0;busy=true;$('#welcome').hidden=true;status('실험 중','running');$('#result').textContent=slowRun?'동현랭 명령을 한 줄씩 천천히 실행하고 있다.':'동현랭 명령을 실행하고 있다.';controls();
   const AC=window.AudioContext||window.webkitAudioContext;if(AC&&!audio)audio=new AC();if(audio?.state==='suspended')audio.resume().catch(()=>{});
-  worker.postMessage({type:'run',code:lastSource});
+  worker.postMessage({type:'run',code:lastSource,slow:slowRun});
 }
-$('#run').onclick=run;$('#demo').onclick=run;$('#halt').onclick=()=>worker?.postMessage({type:'halt'});
+$('#run').onclick=run;$('#demo').onclick=run;$('#slow').onclick=()=>run(true);$('#halt').onclick=()=>worker?.postMessage({type:'halt'});
 $('#code').onkeydown=e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}if(e.key==='Tab'&&!busy){e.preventDefault();const t=e.target,start=t.selectionStart;t.setRangeText('  ',start,t.selectionEnd,'end');codeChanged();}};
 function download(name,text,type){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#save').onclick=()=>download('donghyunpa-experiment.dh',$('#code').value,'text/plain;charset=utf-8');
@@ -236,6 +238,6 @@ function drawChart(){
 }
 window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.8',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
-$('#run').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
+$('#run').addEventListener('click',animate);$('#slow').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});
 draw();drawChart();init();
