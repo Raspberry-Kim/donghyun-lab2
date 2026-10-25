@@ -13,7 +13,7 @@
 - **연결망 원 연구:** Chen BL, Hall DH, Chklovskii DB. Wiring optimization can relate neuronal structure and function. PNAS 103(12), 4723–4728 (2006). http://www.pnas.org/content/103/12/4723.abstract
 - **다층 네트워크 도구:** De Domenico M, Porter MA, Arenas A. MuxViz: A Tool for Multilayer Analysis and Visualization of Networks. Journal of Complex Networks 3(2), 159–176 (2015). http://comnet.oxfordjournals.org/content/3/2/159
 
-원 데이터를 지원하고 개발한 European Commission FET-Proactive PLEXMATH (Grant No. 317614)와 Alephsys Lab의 고지는 `data/SOURCE.md`에 원문 그대로 남겨 두었다. 연결망의 구조와 한계를 살펴볼 때는 Varshney LR, Chen BL, Paniagua E, Hall DH, Chklovskii DB. Structural Properties of the *Caenorhabditis elegans* Neuronal Network. PLOS Computational Biology 7(2), e1001066 (2011)도 참고했다. 다만 동현파가 실제로 가져온 파일은 이 논문이 아니라 위 CoMuNeLab 저장소에서 왔다. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001066
+원 데이터를 지원하고 개발한 European Commission FET-Proactive PLEXMATH (Grant No. 317614)와 Alephsys Lab의 고지는 `data/SOURCE.md`에 원문 그대로 기록. 연결망의 구조와 한계를 살펴볼 때는 Varshney LR, Chen BL, Paniagua E, Hall DH, Chklovskii DB. Structural Properties of the *Caenorhabditis elegans* Neuronal Network. PLOS Computational Biology 7(2), e1001066 (2011)도 참고했다. 다만 동현파가 실제로 가져온 파일은 이 논문이 아니라 위 CoMuNeLab 저장소에서 왔다. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001066
 
 라이선스가 따로 적혀 있지 않은 다른 미러의 연결 파일이나 WormAtlas 이미지는 가져오지 않았다.
 
@@ -29,9 +29,9 @@
 
 ## 동현파가 손댄 부분
 
-뉴런마다 0부터 시작하는 번호를 새로 매기고, 원 자료가 방향 없는 연결이라고 밝힌 대로 각 층에서 순서만 다르거나 겹친 기록을 하나로 합쳤다. 그렇게 원본 기록 5,863개가 층별 연결 3,108개가 되었다. 뉴런 279개의 이름은 그대로 두었다.
+뉴런마다 0부터 시작하는 번호 부여. 원 자료가 방향 없는 연결이라고 밝힌 대로 각 층에서 순서만 다르거나 겹친 기록은 하나로 통합. 원본 기록 5,863개에서 층별 연결 3,108개로 정리. 뉴런 279개의 이름은 그대로.
 
-원 자료에 없는 시냅스 방향이나 전달물질, 생리적 가중치를 되살렸다고 말하지는 않는다. 기능적 부호와 이득, 연속 활성도 방정식, 접촉 분포, 적응, 밀림·출렁임·구김은 동현파가 따로 정한 가정이며, `PROVENANCE.md`와 소스 코드에 모두 공개했다.
+원 자료에 없는 시냅스 방향이나 전달물질, 생리적 가중치를 되살렸다고 말하지는 않는다. 기능적 부호와 이득, 연속 활성도 방정식, 접촉 분포, 적응, 밀림·출렁임·구김은 동현파가 따로 정한 가정이며, `PROVENANCE.md`와 소스 코드에 모두 공개.
 
 ## 데이터의 ODbL·DbCL 조건
 
