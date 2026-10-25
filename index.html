@@ -1630,7 +1630,7 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
   };
   expression();
   arm(0);if(active&&hand===1)arm(1);
-  if(active&&hand===0){g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);expression();} // Right-hand punch: the far right arm stays behind her head and body.
+  if(!active||hand===0){g.drawImage(girlParts.upper,bx-lx,top+dy);g.drawImage(girlParts.skirt,bx-P(lean/2),top+29);expression();} // Ready pose and right-hand punch: the far right arm stays behind her head and body.
   // After-images and short speed lines show the direction without becoming a control.
   if(active&&t>.24&&t<contact+.1){
     if(t<contact)for(let i=3;i>=1;i--){const u=t-i*.035;if(u<.22)continue;glove(hand,glovePath(type,u,rest[hand],target,contact),true,.34-i*.08,true);}
@@ -1649,7 +1649,7 @@ function drawPixelGirl(main,s,punches,wormPoint,glovePath){
     for(let i=2;i<=P(r*.6);i++){g.fillRect(x-i,y-i,1,1);g.fillRect(x-i,y+i,1,1);}
     g.fillStyle='#fff3c4';g.fillRect(x-1,y-1,2,2);g.globalAlpha=1;
   }
-  if(active&&hand===0){ // Right-hand punch: the left arm stays folded against the chest, nearest to us, so it is drawn last and never covered.
+  if(!active||hand===0){ // Ready pose and right-hand punch: the left arm stays folded against the chest, nearest to us, so it is drawn last and never covered.
     const fold=q=>{const v=sc(q);return {x:v.x-lx*2,y:v.y};},start=shoulders[1],elbow=fold({x:cx-1,y:sy+15}),end=fold({x:cx-13,y:sy+4});
     brush([start,elbow,end],4,ink);brush([start,elbow,end],2,skin);glove(1,end,false);
   }
