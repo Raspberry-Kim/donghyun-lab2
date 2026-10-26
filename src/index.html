@@ -9,7 +9,7 @@
 <body>
 <header class="header">
   <a class="brand" href="#" aria-label="동현파 실험실로"><span class="brand-main">동현<span>파</span><sup>TM</sup></span><i class="brand-divider"></i><span class="brand-sub">WORM LAB<small>코드로 건드리는 작은 신경계</small></span></a>
-  <div class="edition">v0.97<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  <div class="edition">v0.98<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
 </header>
 <main>
 <!-- SERIES-NAV-START -->
@@ -62,7 +62,7 @@
     </div>
   </section>
   <section id="tab-protocol" class="tab-panel document" hidden>
-    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v0.97</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
+    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v0.98</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
     <div class="table-wrap"><table><thead><tr><th>명령</th><th>하는 일</th><th>인수</th></tr></thead><tbody>
       <tr><td>1</td><td>초기화</td><td>시드</td></tr>
       <tr><td>2</td><td>기술 시행</td><td>기술 번호 · 손(오른손 1 / 왼손 2) · 세기 0~100 · 접촉 위치 5~95%</td></tr>
@@ -80,7 +80,7 @@
   <section id="tab-science" class="tab-panel document" hidden>
     <nav class="reference-tabs" aria-label="모델과 출처 문서"><button type="button" data-reference="overview" class="active" aria-pressed="true" aria-controls="reference-overview">모델 설명</button><button type="button" data-reference="provenance" aria-pressed="false" aria-controls="offline-provenance">데이터 계보</button><button type="button" data-reference="credits" aria-pressed="false" aria-controls="offline-credits">전체 출처·이용 안내</button><button type="button" data-reference="licenses" aria-pressed="false" aria-controls="offline-licenses">글꼴·코드 라이선스</button></nav>
     <div id="reference-overview" class="reference-panel" data-reference-panel="overview" tabindex="-1">
-      <div class="doc-heading"><div class="eyebrow">BEHIND THE LITTLE WORM</div><h2>작은 선충은 어떻게 반응할까?</h2><p>귀여운 장면의 중심에는 공개된 예쁜꼬마선충 279개 뉴런의 연결망이 있다. 여기에 문헌으로 알려진 촉각 회로의 방향성을 제약으로 더해, 입력과 출력의 차이가 보이는 실험실로 만들었다.</p></div>
+      <div class="doc-heading"><div class="eyebrow">BEHIND THE LITTLE WORM</div><h2>예쁜꼬마선충은 어떻게 반응할까?</h2><p>귀여운 장면의 중심에는 공개된 예쁜꼬마선충 279개 뉴런의 연결망이 있다. 여기에 문헌으로 알려진 촉각 회로의 방향성을 제약으로 더해, 입력과 출력의 차이가 보이는 실험실로 만들었다.</p></div>
       <div class="science-block"><span class="index">01</span><div><h3>유전체가 공개되었다고, 행동이 저절로 계산되지는 않는다.</h3><p>예쁜꼬마선충은 1998년 동물 최초의 완성 유전체 해독 사례가 되었다. 하지만 동현파가 실제로 계산하는 입력은 유전체 서열이 아니라 공개 연결망과 촉각 회로에 관한 연구다. 유전자 발현·세포 발생·전신 생리를 계산하는 모델은 아니다. <a href="https://www.genome.gov/25520394/online-education-kit-1998-genome-of-roundworm-c-elegans-sequenced" target="_blank" rel="noopener">NHGRI의 유전체 역사</a></p></div></div>
       <div class="science-block"><span class="index">02</span><div><h3>279개 뉴런과 3층의 연결을 가져왔다.</h3><p>CoMuNeLab 공개 자료의 전기적 접합·화학적 monadic 접합·화학적 polyadic 접합 세 층을 사용한다. 원본 5,863개 기록을 층별 무방향 연결 3,108개로 정리했고, 원 뉴런 이름과 원본 파일을 보존했다. 이것은 선충의 모든 뉴런·모든 시냅스 수라는 뜻이 아니다.</p><p>이 자료는 무방향·무가중치라고 명시되어 있다. 따라서 파일의 순서를 화학 시냅스 방향으로 해석하거나 1을 실제 시냅스 강도로 읽지 않는다. 방향·효과·시간 상수는 아래의 명시적 모델 가정이다. <a href="https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome" target="_blank" rel="noopener">원 데이터와 ODbL 조건</a> · <a href="PROVENANCE.md">변환·검증 내역</a></p></div></div>
       <div class="science-block"><span class="index">03</span><div><h3>앞쪽과 뒤쪽의 촉각 회로는 다르게 연결된다.</h3><p>문헌에서는 앞쪽 ALM·AVM을 통한 부드러운 촉각이 후진을, 뒤쪽 PLM 입력이 전진을 유도하는 회로를 설명한다. 동현파는 원 연결이 있는 쌍에 한해 이러한 방향·부호의 기능적 제약을 더한다. 원 자료로부터 방향이나 전기생리 파라미터를 복원했다는 뜻은 아니다. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4281349/" target="_blank" rel="noopener">Schafer의 촉각 회로 설명</a></p><p>화면은 막전위나 발화율 대신 0~1의 단위 없는 모델 활성도(a.u.)를 보여 준다. 동일 입력의 앞·뒤 차이를 확인하는 교육용 기능 검사이지, 독립적인 생물학적 예측 정확도 검증은 아니다.</p></div></div>
@@ -92,7 +92,7 @@
     <!-- REFERENCE_DOCUMENTS -->
   </section>
 </main>
-<footer><span>동현파 v0.97 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
+<footer><span>동현파 v0.98 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
 <script>window.WORM_CONFIG={worker:"./worker.js",data:"./connectome.json"};</script>
 <script type="module" src="./app.js"></script>
 </body></html>

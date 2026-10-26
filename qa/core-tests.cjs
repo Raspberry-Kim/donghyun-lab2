@@ -2,6 +2,17 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('p
 const D=require('../data/connectome.json'),{WormCircuit}=require('../src/brain.js'),{examples,expression}=require('../src/examples.js');
 const source=['donghyun.js','brain.js','examples.js','worker.js'].map(f=>fs.readFileSync(path.join(__dirname,'../src',f),'utf8')).join('\n');
 let total=0;const check=(name,f)=>{f();total++;console.log('PASS',name);};
+check('Failed new run cannot reuse earlier observations; next valid run is unchanged',()=>{
+  const queue=[],messages=[],c=vm.createContext({console,performance,setTimeout:fn=>queue.push(fn),postMessage:m=>messages.push(structuredClone(m))});c.self=c;vm.runInContext(source,c);
+  const drain=()=>{let n=0;while(queue.length){queue.shift()();assert(++n<100000);}};
+  c.onmessage({data:{type:'init',data:D}});
+  c.onmessage({data:{type:'run',code:examples[0].code}});drain();const first=messages.at(-1);
+  assert(first.allSamples.length>0);
+  c.onmessage({data:{type:'run',code:'잘못된 시작'}});drain();const failed=messages.at(-1);
+  assert.equal(failed.type,'error');assert.equal(failed.samples.length,0);assert.equal(failed.allSamples.length,0);assert.equal(failed.steps,0);
+  c.onmessage({data:{type:'run',code:examples[0].code}});drain();
+  assert.deepStrictEqual(messages.at(-1).state,first.state);assert.deepStrictEqual(messages.at(-1).allSamples,first.allSamples);
+});
 const program=commands=>'나는 동현이냐?\n'+commands.flatMap(a=>a.map(n=>'뿡뿡 '+expression(n)+'~뿡뿡뿡')).join('\n')+'\n동현이구나';
 function execute(code,stop=false){
   let q=[],messages=[],loops=0;

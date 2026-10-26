@@ -19,10 +19,19 @@ function dhSync(){dhHl.scrollTop=dhCode.scrollTop;dhHl.scrollLeft=dhCode.scrollL
 function dhMetrics(){const cs=getComputedStyle(dhCode);for(const p of ['paddingTop','paddingRight','paddingBottom','paddingLeft','fontFamily','fontSize','lineHeight','tabSize','letterSpacing'])dhHl.style[p]=cs[p];}
 let dhCur=0,dhSlowOn=false;
 function dhSlowUI(v){dhSlowOn=v;const b=document.getElementById('slow');if(b)b.setAttribute('aria-pressed',String(v));}
+function dhRunningNotice(){$('#result').textContent=dhSlowOn?'동현랭 명령을 한 줄씩 천천히 실행하고 있다.':'동현랭 명령을 실행하고 있다.';}
 function dhMark(n){if(n===dhCur)return;dhCur=n;dhHl.querySelectorAll('.ln.cur').forEach(e=>e.classList.remove('cur'));if(n>0)dhHl.children[n-1]?.classList.add('cur');}
 function dhHighlight(){dhCur=0;dhMetrics();dhHl.innerHTML=dhCode.value.split('\n').map(l=>`<span class="ln">${dhLine(l)||' '}</span>`).join('')+'<span class="ln"> </span>';dhSync();}
 dhCode.addEventListener('scroll',dhSync);addEventListener('resize',dhHighlight);
-function codeChanged(){const n=$('#code').value.split('\n').length;$('#line-count').textContent=n+'줄';$('#lines').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');dhHighlight();}
+function dhIndentComments(){
+  const text=dhCode.value,starts=[...text.matchAll(/^ㅋㅋ/gm)].map(m=>m.index);if(!starts.length)return;
+  const {selectionStart:a,selectionEnd:b,selectionDirection:direction,scrollTop:y,scrollLeft:x}=dhCode;
+  dhCode.value=text.replace(/^ㅋㅋ/gm,'  ㅋㅋ');
+  const shifted=p=>p+2*starts.filter(i=>i<=p).length;
+  dhCode.setSelectionRange(shifted(a),shifted(b),direction);dhCode.scrollTop=y;dhCode.scrollLeft=x;
+}
+dhCode.addEventListener('compositionend',()=>codeChanged());
+function codeChanged(e){if(!e?.isComposing)dhIndentComments();const n=$('#code').value.split('\n').length;$('#line-count').textContent=n+'줄';$('#lines').textContent=Array.from({length:n},(_,i)=>i+1).join('\n');dhHighlight();}
 function selectExample(){
   const ex=examples.find(e=>e.id===$('#example').value);$('#code').value=ex.code;$('#example-note').textContent=ex.note;codeChanged();
   $('#welcome h3').textContent=ex.title.slice(5);
@@ -88,7 +97,7 @@ function run(e){const slowRun=e===true;if(!ready||busy)return;dhSlowUI(slowRun);
   const AC=window.AudioContext||window.webkitAudioContext;if(AC&&!audio)audio=new AC();if(audio?.state==='suspended')audio.resume().catch(()=>{});
   worker.postMessage({type:'run',code:lastSource,slow:slowRun});
 }
-$('#run').onclick=run;$('#demo').onclick=run;$('#slow').onclick=()=>{if(busy){dhSlowUI(!dhSlowOn);worker.postMessage({type:'speed',slow:dhSlowOn});if(!dhSlowOn)dhMark(0);}else run(true);};$('#halt').onclick=()=>worker?.postMessage({type:'halt'});
+$('#run').onclick=run;$('#demo').onclick=run;$('#slow').onclick=()=>{if(busy){dhSlowUI(!dhSlowOn);dhRunningNotice();worker.postMessage({type:'speed',slow:dhSlowOn});if(!dhSlowOn)dhMark(0);}else run(true);};$('#halt').onclick=()=>worker?.postMessage({type:'halt'});
 $('#code').onkeydown=e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run();}if(e.key==='Tab'&&!busy){e.preventDefault();const t=e.target,start=t.selectionStart;t.setRangeText('  ',start,t.selectionEnd,'end');codeChanged();}};
 function download(name,text,type){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#save').onclick=()=>download('donghyunpa-experiment.dh',$('#code').value,'text/plain;charset=utf-8');
@@ -97,7 +106,7 @@ $('.file-label').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault
 $('#open').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(busy){$('#result').textContent='중단한 뒤 파일을 열 수 있다.';e.target.value='';return;}if(f.size>400000){$('#result').textContent='파일이 너무 크다. 400 KB 이하의 동현랭 코드를 열어라.';return;}const t=await f.text();if(t.length>100000){$('#result').textContent='코드는 100,000자까지다.';return;}$('#code').value=t;codeChanged();$('#result').textContent='코드를 불러왔다. 실행하면 새 실험으로 시작한다.';e.target.value='';};
 $('#csv').onclick=()=>{
   if(!allSamples.length)return;const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';
-  const meta=[['# model','동현파 0.97 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
+  const meta=[['# model','동현파 0.98 / 279 neurons / 3108 undirected layer edges / dimensionless activation'],['# data','CoMuNeLab C.ELEGANS MULTIPLEX CONNECTOME; ODbL 1.0 / DbCL 1.0; reindexed and deduplicated'],['# source','https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome'],['# license','https://opendatacommons.org/licenses/odbl/1-0/'],['# limitation','Not measured electrophysiology, genome simulation, boxing injury or pain model'],['# code',lastSource]],keys=Object.keys(allSamples[0]);
   download('donghyunpa-observations.csv','\ufeff'+meta.map(r=>r.map(esc).join(',')).join('\n')+'\n'+keys.join(',')+'\n'+allSamples.map(s=>keys.map(k=>esc(s[k])).join(',')).join('\n'),'text/csv;charset=utf-8');
 };
 function setup(c,context,h){
@@ -237,7 +246,7 @@ function drawChart(){
   cc.restore();
   $('#chart-scale').textContent='Y축 0–'+ymax.toFixed(2)+' a.u. · 자동 범위 · 실험 최대 '+chartPeak.toFixed(3);
 }
-window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.97',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
+window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'0.98',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
 $('#run').addEventListener('click',animate);$('#slow').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});
