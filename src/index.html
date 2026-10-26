@@ -12,7 +12,7 @@
 <body>
 <header class="header">
   <a class="brand" href="#" aria-label="동현파 실험실로"><span class="brand-main">동현<span>파</span><sup>TM</sup></span><i class="brand-divider"></i><span class="brand-sub">WORM LAB<small>코드로 접촉하는 작은 신경계</small></span></a>
-  <div class="edition">v1.01<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  <div class="edition">v1.02<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
 </header>
 <main>
 <!-- SERIES-NAV-START -->
@@ -51,7 +51,7 @@
         <section class="editor-panel">
           <div class="section-title"><h2><span>C</span> 동현랭 실험 코드</h2><span>experiment.dh</span></div>
           <div class="dh-panel">
-          <div class="dh-head"><select id="example" aria-label="동현랭 예제 선택"></select><span class="dh-spacer"></span><button id="run" class="dh-btn dh-run" disabled title="Ctrl/⌘ + Enter"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>실행 <kbd>⌘↵</kbd></button><button id="slow" class="dh-btn dh-slow" disabled title="한 줄씩 천천히 실행 · 실행 중에 다시 누르면 원래 속도" aria-label="천천히 실행" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></button><button id="halt" class="dh-btn dh-halt" disabled>오겡끼데스까</button></div>
+          <div class="dh-head"><select id="example" aria-label="동현랭 예제 선택"></select><span class="dh-spacer"></span><button id="run" class="dh-btn dh-run" disabled title="Ctrl/⌘ + Enter"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>실행 <kbd>⌘↵</kbd></button><button id="slow" class="dh-btn dh-slow" disabled title="한 줄씩 천천히 실행 · 실행 중에 다시 누르면 원래 속도" aria-label="천천히 실행" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></button><button id="repeat10" class="dh-btn dh-slow dh-repeat" disabled title="같은 코드를 10회 이어서 실행 · 매번 새 시드 · 반복 중에 다시 누르면 남은 반복 취소" aria-label="10회 반복 실행" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.5V9a3 3 0 0 1 3-3h14"></path><path d="M18 3.5l2.5 2.5-2.5 2.5"></path><path d="M20.5 12.5V15a3 3 0 0 1-3 3h-14"></path><path d="M6 15.5l-2.5 2.5 2.5 2.5"></path><text x="12" y="12.2" fill="currentColor" stroke="none" font-size="8.5" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,sans-serif">10</text></svg></button><button id="halt" class="dh-btn dh-halt" disabled>오겡끼데스까</button></div>
           <div class="code-wrap"><div id="lines" aria-hidden="true"></div><textarea id="code" aria-label="동현랭 코드" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea></div>
           <div class="code-meta dh-status"><span id="line-count"></span><span>정수 출력 → 실험 명령 · ⌘/Ctrl ↵ 실행</span></div>
           </div>
@@ -65,7 +65,7 @@
     <div class="workflow"><span>동현랭 코드</span><b>→</b><span>소녀의 기술</span><b>→</b><span>접촉·감각 입력</span><b>→</b><span>신경 활성</span><b>→</b><span>선충의 몸</span><small>• 꽥꽥으로 읽고, 차단·복원해 다시 실험한다.</small></div>
   </section>
   <section id="tab-protocol" class="tab-panel document" hidden>
-    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v1.01</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
+    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v1.02</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
     <div class="table-wrap"><table><thead><tr><th>명령</th><th>하는 일</th><th>인수</th></tr></thead><tbody>
       <tr><td>1</td><td>초기화</td><td>시드</td></tr>
       <tr><td>2</td><td>기술 시행</td><td>기술 번호 · 손(오른손 1 / 왼손 2) · 세기 0~100 · 접촉 위치 5~95%</td></tr>
@@ -95,7 +95,7 @@
     <!-- REFERENCE_DOCUMENTS -->
   </section>
 </main>
-<footer><span>동현파 v1.01 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
+<footer><span>동현파 v1.02 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
 <script>window.WORM_CONFIG={worker:"./worker.js",data:"./connectome.json"};</script>
 <script type="module" src="./app.js"></script>
 </body></html>
