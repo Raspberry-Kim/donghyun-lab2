@@ -6,6 +6,11 @@ const PLAYBACK_STRETCH=3; // Wall-clock presentation only; all simulated dt and 
 const assert=(ok,msg)=>{if(!ok)throw Error(msg);};
 const range=(x,a,b,name)=>assert(Number.isSafeInteger(x)&&x>=a&&x<=b,`${name}: ${a}~${b} 정수여야 한다.`);
 function log(text){logs.push({ms:world?.time||0,text});if(logs.length>300)logs.shift();}
+/* Seed: the first run uses the seed written in code. Running the same code again shifts every seed by one random offset,
+   so a repeat run draws new luck while seeds that are equal inside one program stay equal. */
+let seedOffset=0,seedsUsed=[];
+function pickSeedOffset(){const u=new Uint32Array(1);if(typeof crypto!=='undefined'&&crypto.getRandomValues)crypto.getRandomValues(u);else u[0]=Math.floor(Math.random()*4294967296);return 1+u[0]%2147483646;}
+function runSeed(s){return seedOffset?(s-1+seedOffset)%2147483647+1:s;}
 function resetWorld(seed){
   brain=new WormCircuit(D);brain.reset(seed);
   world={seed,time:0,hits:0,action:null,mode:'출발 대기',rates:{...brain.last},q:Array(19).fill(0),v:Array(19).fill(0),phase:0,
@@ -27,7 +32,7 @@ function accept(t){
 }
 function command(op,a){
   switch(op){
-    case 1:range(a[0],1,2147483647,'시드');resetWorld(a[0]);log('실험 초기화 · 시드 '+a[0]);break;
+    case 1:{range(a[0],1,2147483647,'시드');const s=runSeed(a[0]);resetWorld(s);seedsUsed.push(s);log('실험 초기화 · 시드 '+s+(seedOffset?` (다시 실행 · 코드의 시드 ${a[0]} 대신)`:''));break;}
     case 2:{
       const [type,hand,power,position]=a;range(type,1,8,'기술 번호');range(hand,1,2,'손: 오른손 1 / 왼손 2');range(power,0,100,'접촉 세기');range(position,5,95,'접촉 위치');
       const spec=punches[type],duration=Math.round(spec.duration/20)*20;
@@ -85,7 +90,7 @@ function tick(){
   if(world.time%100===0)samples.push({ms:world.time,...r,contraction:world.contraction,mechanical,knockback:world.knockback,theatrics:world.theatrics,impulse:world.impulse,hits:world.hits,position:world.lastPosition,power:world.lastPower,mecGain:world.mecGain});
 }
 function snapshot(type='frame',extra={}){
-  postMessage({type,state:world,logs:logs.slice(-30),samples:samples.slice(-100),steps,line:vm?.currentLine||1,phys:vm&&!vm.done?(vm.stmts?.[vm.pc]?.phys||0):0,slow,...extra});
+  postMessage({type,state:world,logs:logs.slice(-30),samples:samples.slice(-100),steps,line:vm?.currentLine||1,phys:vm&&!vm.done?(vm.stmts?.[vm.pc]?.phys||0):0,slow,seeds:seedsUsed.length?seedsUsed:[world.seed],...extra});
 }
 function fail(e){running=false;log('오류: '+e.message);snapshot('error',{error:e.message,line:e.line||vm?.currentLine,allSamples:samples});}
 function loop(id){
@@ -113,10 +118,10 @@ onmessage=({data:m})=>{
       if(h.halted){running=false;runId++;pending=0;packet=[];token='';log('오겡끼데스까 · 동현랭 중단 프로그램');snapshot('halted',{allSamples:samples});}return;
     }
     if(m.type==='run'){
-      runId++;running=false;resetWorld(1);logs=[];steps=0;elapsed=0;packet=[];token='';pending=0;vm=null;slow=!!m.slow;
+      runId++;running=false;seedOffset=m.repeat?pickSeedOffset():0;seedsUsed=[];resetWorld(runSeed(1));logs=[];steps=0;elapsed=0;packet=[];token='';pending=0;vm=null;slow=!!m.slow;
       assert(typeof m.code==='string'&&m.code.length<=100000,'코드는 100,000자까지다.');
       const candidate=new Donghyun.VM(m.code,{write,readInt:()=>{assert(queue.length>0,'명령 6으로 관측을 요청한 뒤 꽥꽥으로 읽어라.');return queue.shift();}});
-      vm=candidate;running=true;wallStart=performance.now();log('동현랭 프로그램 시작');snapshot();loop(runId);
+      vm=candidate;running=true;wallStart=performance.now();log(seedOffset?'동현랭 프로그램 시작 · 같은 코드를 다시 실행해 새 시드를 쓴다':'동현랭 프로그램 시작');snapshot();loop(runId);
     }
   }catch(e){fail(e);}
 };

@@ -12,7 +12,7 @@
 <body>
 <header class="header">
   <a class="brand" href="#" aria-label="동현파 실험실로"><span class="brand-main">동현<span>파</span><sup>TM</sup></span><i class="brand-divider"></i><span class="brand-sub">WORM LAB<small>코드로 접촉하는 작은 신경계</small></span></a>
-  <div class="edition">v0.98<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+  <div class="edition">v1.01<button id="theme" class="icon-btn" aria-label="밝은 화면과 어두운 화면 전환" title="화면 전환" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
 </header>
 <main>
 <!-- SERIES-NAV-START -->
@@ -45,7 +45,7 @@
         <div class="section-title chart-title"><h2><span>B</span> 신경 활성 기록</h2><span id="chart-scale">Y축 자동 범위 · 단위 a.u.</span></div>
         <canvas id="chart" width="960" height="235" role="img" aria-label="앞쪽·뒤쪽 감각, 후진·전진 회로와 강한 촉각 계열의 모델 활성도 그래프"></canvas>
         <div class="chart-legend"><span style="color:#bb8465">앞쪽 감각</span><span style="color:#608d87">뒤쪽 감각</span><span style="color:#ad675d">후진 회로</span><span style="color:#748a5a">전진 회로</span><span style="color:#877699">FLP / PVD</span></div>
-        <p class="model-note">글러브의 접촉이 감각 입력이 되고, 회로의 활성 차이가 선충의 꿈틀거림과 빛에 연결된다. 몸과 빛의 반응 표시는 10배 확대하지만, 그래프와 CSV는 원값을 사용한다. 높은 기록창과 자동 Y축이 큰 봉우리까지 여유 있게 보여 주며 같은 실행에서는 축 범위를 줄이지 않는다. 반짝이는 점은 회로 그룹의 도식으로, 실제 신경 위치·발화 횟수·통증·손상을 뜻하지 않는다.</p>
+        <p class="model-note">글러브의 접촉이 감각 입력이 되고, 회로의 활성 차이가 선충의 꿈틀거림과 빛으로 연결되어 표현된다. 몸과 빛의 반응 표시는 10배 확대된 값이지만, 그래프와 CSV는 원래의 값을 사용한다. 반짝이는 점은 회로 그룹의 도식화된 표현으로, 실제 신경 위치·발화 횟수·통증·손상을 뜻하지 않는다.</p>
       </div>
       <div class="coding-column">
         <section class="editor-panel">
@@ -60,12 +60,12 @@
           <div class="file-row"><button id="save">.dh 저장</button><label class="file-label">.dh 열기<input id="open" type="file" accept=".dh,.txt,text/plain" hidden></label><button id="csv" disabled>관측 CSV</button></div>
         </section>
         <section class="log-panel"><div class="section-title"><h2><span>D</span> 실험 기록</h2><span id="step-count">0문장</span></div><ol id="log"><li><time>00.00</time>실행 대기. 아직 접촉하지 않았다.</li></ol></section>
-        <div class="pipeline">동현랭 코드 <b>→</b> 소녀의 기술 <b>→</b> 접촉·감각 입력 <b>→</b> 신경 활성 <b>→</b> 선충의 몸<br><small>꽥꽥으로 읽고, 차단·복원해 다시 실험한다.</small></div>
       </div>
     </div>
+    <div class="workflow"><span>동현랭 코드</span><b>→</b><span>소녀의 기술</span><b>→</b><span>접촉·감각 입력</span><b>→</b><span>신경 활성</span><b>→</b><span>선충의 몸</span><small>• 꽥꽥으로 읽고, 차단·복원해 다시 실험한다.</small></div>
   </section>
   <section id="tab-protocol" class="tab-panel document" hidden>
-    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v0.98</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
+    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v1.01</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 소녀의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
     <div class="table-wrap"><table><thead><tr><th>명령</th><th>하는 일</th><th>인수</th></tr></thead><tbody>
       <tr><td>1</td><td>초기화</td><td>시드</td></tr>
       <tr><td>2</td><td>기술 시행</td><td>기술 번호 · 손(오른손 1 / 왼손 2) · 세기 0~100 · 접촉 위치 5~95%</td></tr>
@@ -95,7 +95,7 @@
     <!-- REFERENCE_DOCUMENTS -->
   </section>
 </main>
-<footer><span>동현파 v0.98 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
+<footer><span>동현파 v1.01 · 인하대학교 의과대학 교수 김동현</span><span>279개 뉴런 공개 연결망 · 교육용 모델 · <a href="#credits">출처·이용 조건</a></span><span><a href="https://raspberry-kim.github.io/donghyun-lang/" target="_blank" rel="noopener">동현랭</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lang" target="_blank" rel="noopener">동현랭 GitHub</a> · <a href="https://github.com/Raspberry-Kim/donghyun-lab2" target="_blank" rel="noopener">동현파 GitHub</a> · <a href="https://raspberry-kim.github.io/donghyun-lab1/" target="_blank" rel="noopener">동현초</a></span></footer>
 <script>window.WORM_CONFIG={worker:"./worker.js",data:"./connectome.json"};</script>
 <script type="module" src="./app.js"></script>
 </body></html>

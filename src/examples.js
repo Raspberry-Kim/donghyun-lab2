@@ -8,7 +8,7 @@ function expression(n){
 const output=(...ns)=>ns.map(n=>'뿡뿡 '+expression(n)+'~뿡뿡뿡~').join('');
 const block=(label,...ns)=>'ㅋㅋ '+label+'\n'+output(...ns);
 const wrap=a=>['나는 동현이냐?',...a,'동현이구나'].join('\n');
-const reset=block('같은 시드로 실험을 초기화한다',1,7);
+const reset=block('처음은 시드 7, 다시 실행하면 새 시드로 실험을 초기화한다',1,7);
 const wait=ms=>block('반응을 관찰한다',3,ms);
 const hit=(type,power,position,label,hand=1)=>block(label,2,type,hand,power,position);
 const examples=[

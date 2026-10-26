@@ -13,6 +13,14 @@ check('Failed new run cannot reuse earlier observations; next valid run is uncha
   c.onmessage({data:{type:'run',code:examples[0].code}});drain();
   assert.deepStrictEqual(messages.at(-1).state,first.state);assert.deepStrictEqual(messages.at(-1).allSamples,first.allSamples);
 });
+check('Same code run again draws a new random seed; first run keeps the written seed',()=>{
+  const queue=[],messages=[],c=vm.createContext({console,performance,setTimeout:fn=>queue.push(fn),postMessage:m=>messages.push(structuredClone(m))});c.self=c;vm.runInContext(source,c);
+  const drain=()=>{let n=0;while(queue.length){queue.shift()();assert(++n<100000);}};
+  c.onmessage({data:{type:'init',data:D}});const code=examples[0].code;
+  c.onmessage({data:{type:'run',code}});drain();const first=messages.at(-1);assert.deepStrictEqual(first.seeds,[7]);
+  c.onmessage({data:{type:'run',code,repeat:true}});drain();const again=messages.at(-1);assert.notEqual(again.seeds[0],7);assert.equal(again.state.seed,again.seeds[0]);
+  c.onmessage({data:{type:'run',code}});drain();assert.deepStrictEqual(messages.at(-1).state,first.state);
+});
 const program=commands=>'나는 동현이냐?\n'+commands.flatMap(a=>a.map(n=>'뿡뿡 '+expression(n)+'~뿡뿡뿡')).join('\n')+'\n동현이구나';
 function execute(code,stop=false){
   let q=[],messages=[],loops=0;
