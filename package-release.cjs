@@ -4,6 +4,7 @@ fs.rmSync(target,{recursive:true,force:true});
 fs.mkdirSync(target,{recursive:true});
 const names=['index.html','README.md','SPEC.md','PROVENANCE.md','CREDITS.md','LICENSE','CHANGELOG.md','package.json','build.cjs','render-docs.cjs','package-release.cjs','.gitignore','.nojekyll','src','data','tools','examples','fonts','licenses','vendor'];
 for(const name of names)fs.cpSync(path.join(root,name),path.join(target,name),{recursive:true});
+for(const name of ['icon-files.cjs','favicon.ico','favicon.png','apple-touch-icon.png'])fs.copyFileSync(path.join(root,name),path.join(target,name));
 fs.mkdirSync(path.join(target,'qa'),{recursive:true});
 for(const name of ['core-tests.cjs','docs-tests.cjs','visual-model-tests.cjs','core-results.json','TESTING.md','browser-results.json']){
   const f=path.join(root,'qa',name);if(fs.existsSync(f))fs.copyFileSync(f,path.join(target,'qa',name));
