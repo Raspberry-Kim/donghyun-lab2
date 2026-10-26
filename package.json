@@ -2,7 +2,7 @@
   "name": "donghyun-lab2",
   "version": "0.98.0",
   "private": true,
-  "description": "동현파™: 동현랭으로 건드리는 선충 촉각 회로실험실",
+  "description": "동현파™: 동현랭으로 접촉하는 선충 촉각 회로실험실",
   "scripts": {
     "data": "node tools/build-connectome.cjs",
     "test": "node qa/core-tests.cjs && node qa/docs-tests.cjs && node qa/visual-model-tests.cjs",
