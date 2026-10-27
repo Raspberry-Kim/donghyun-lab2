@@ -1,62 +1,68 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata below."
-title: "Donghyunbil (동현빌): an educational village-outbreak laboratory on a real contact network, controlled through the esoteric language Donghyun-lang"
+title: "Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang"
 type: software
-version: "0.38.0"
-date-released: "2026-10-27"
+version: "1.02"
+date-released: "2026-10-26"
 authors:
   - family-names: Kim
     given-names: Dong Hyun
     orcid: "https://orcid.org/0000-0001-9883-0229"
     affiliation: "Inha University College of Medicine"
 license: MIT
-repository-code: "https://github.com/raspberry-kim/donghyun-lab3"
-url: "https://raspberry-kim.github.io/donghyun-lab3/"
+repository-code: "https://github.com/Raspberry-Kim/donghyun-lab2"
+url: "https://raspberry-kim.github.io/donghyun-lab2/"
 abstract: >-
-  Donghyunbil is a browser-based, JavaScript educational tool for exploring
-  infectious disease transmission, vaccination and isolation policies. It
-  simulates hypothetical outbreaks (measles, pertussis, influenza) on the
-  publicly released Haslemere contact data (469 participants, 3 days,
-  5-minute resolution), with all interventions specified only through the
-  esoteric programming language Donghyun-lang. It is a teaching model, not a
-  forecasting or policy-decision tool.
+  Donghyunpa is a browser-based, noncommercial educational laboratory in
+  which a pixel-art boxer touches a cartoon nematode and the response is
+  computed on the publicly released C. elegans connectome of 279 neurons
+  (CoMuNeLab C. elegans Multiplex Connectome; electrical, chemical monadic
+  and chemical polyadic layers, 3,108 layer-specific connections). All
+  actions are specified only through the esoteric programming language
+  Donghyun-lang. The activity model is a constrained teaching model, not a
+  biological measurement. The MIT license applies only to the original
+  application code, documentation and artwork; the connectivity database and
+  its derivative are made available under the Open Database License (ODbL)
+  1.0, individual contents under the Database Contents License (DbCL) 1.0,
+  and the fonts under the SIL Open Font License. See LICENSE, CREDITS.md and
+  PROVENANCE.md.
 keywords:
-  - epidemiology education
-  - infectious disease modelling
-  - vaccination
-  - contact network
-  - citizen science data
+  - neuroscience education
+  - Caenorhabditis elegans
+  - connectome
+  - touch circuit
   - esoteric programming language
   - JavaScript
 references:
-  - type: dataset
-    title: "Haslemere contact dataset (skissler/haslemere)"
+  - type: database
+    title: "C. elegans Multiplex Connectome"
     authors:
-      - family-names: Kissler
-        given-names: Stephen M.
-      - family-names: Klepac
-        given-names: Petra
-      - family-names: Tang
-        given-names: Maria
-      - family-names: Conlan
-        given-names: Andrew J. K.
-      - family-names: Gog
-        given-names: Julia R.
-    year: 2020
-    url: "https://github.com/skissler/haslemere"
+      - name: "CoMuNeLab"
+    repository: "https://github.com/CoMuNeLab/C-elegans-Multiplex-Connectome"
+    license: ODbL-1.0
   - type: article
-    title: "Sparking \"The BBC Four Pandemic\": Leveraging citizen science and mobile phones to model the spread of disease"
+    title: "Wiring optimization can relate neuronal structure and function"
     authors:
-      - family-names: Kissler
-        given-names: Stephen M.
-      - family-names: Klepac
-        given-names: Petra
-      - family-names: Tang
-        given-names: Maria
-      - family-names: Conlan
-        given-names: Andrew J. K.
-      - family-names: Gog
-        given-names: Julia R.
-    year: 2018
-    journal: bioRxiv
-    doi: "10.1101/479154"
+      - family-names: Chen
+        given-names: Beth L.
+      - family-names: Hall
+        given-names: David H.
+      - family-names: Chklovskii
+        given-names: Dmitri B.
+    year: 2006
+    journal: "Proceedings of the National Academy of Sciences"
+    volume: 103
+    issue: "12"
+    start: 4723
+    end: 4728
+    doi: "10.1073/pnas.0506806103"
+  - type: software
+    title: "Donghyun-lang (동현랭): a Korean esoteric programming language with a browser playground"
+    authors:
+      - family-names: Kim
+        given-names: Dong Hyun
+        orcid: "https://orcid.org/0000-0001-9883-0229"
+        affiliation: "Inha University College of Medicine"
+    version: "1.53"
+    license: MIT
+    repository-code: "https://github.com/Raspberry-Kim/donghyun-lang"
