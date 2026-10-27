@@ -4,6 +4,7 @@ title: "Donghyunpa (동현파): an educational C. elegans touch-circuit laborato
 type: software
 version: "1.02"
 date-released: "2026-10-26"
+doi: "10.5281/zenodo.23689488"
 authors:
   - family-names: Kim
     given-names: Dong Hyun
