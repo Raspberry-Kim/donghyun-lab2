@@ -24,6 +24,9 @@
 /* 휴대폰 한 단: 빈 실험 기록이 자리를 비워 두지 않도록 내용만큼 늘다가 원래 높이에서 멈춘다 */
 @media(max-width:780px){.coding-column .log-panel ol{height:auto;max-height:130px}}
 
+/* 소개 문장은 단어 중간에서 끊지 않는다 */
+.intro p{word-break:keep-all}
+
 /* Exact palette and font families from Donghyun-lang playground v1.53. */
 :root {
   --bg:#f4eee2;--paper:#fbf7ef;--surface2:#efe7d8;--ink:#26211c;
@@ -249,7 +252,7 @@ a.series-item:focus-visible{outline:3px solid #a5791c;outline-offset:3px}
 <nav class="series-strip" aria-label="동현 프로젝트 이동"><p class="series-context"><strong>동현의 작은 실험들</strong>하나의 언어, 세 개의 작은 세계</p><div class="series-links"><a class="series-item" data-series="lang" href="https://raspberry-kim.github.io/donghyun-lang/" aria-label="동현랭™ 언어 플레이그라운드로 이동"><span class="series-name">동현랭<sup>™</sup></span><span class="series-note">언어</span></a><a class="series-item" data-series="fly" href="https://raspberry-kim.github.io/donghyun-lab1/" aria-label="동현초™ 초파리 회로실험실로 이동"><span class="series-name">동현초<sup>™</sup></span><span class="series-note">초파리</span></a><span class="series-item" data-series="worm" aria-current="page"><span class="series-name">동현파<sup>™</sup></span><span class="series-note">선충</span></span><a class="series-item" data-series="village" href="https://raspberry-kim.github.io/donghyun-lab3/" aria-label="동현빌™ 마을 유행 실험실로 이동"><span class="series-name">동현빌<sup>™</sup></span><span class="series-note">마을</span></a></div></nav>
 <!-- SERIES-NAV-END -->
   <section class="intro">
-    <div><div class="eyebrow">CONNECTOME × ESOTERIC LANGUAGE</div><h1>촉각 회로실험실: <span class="title-brand">동현<span>파</span><sup>TM</sup></span></h1><p>공개된 279개 뉴런 연결망에, <strong>동현랭</strong>으로 작은 자극을 건넨다.</p></div>
+    <div><div class="eyebrow">CONNECTOME × ESOTERIC LANGUAGE</div><h1>촉각 회로실험실: <span class="title-brand">동현<span>파</span><sup>TM</sup></span></h1><p>279개 뉴런의 예쁜꼬마선충 공개 연결망에 <strong>동현랭</strong>으로 접촉한다.</p></div>
     <div class="model-stamp"><strong>279 <span>뉴런</span></strong><strong>3,108 <span>층별 연결</span></strong><small>3층 공개 연결망 + 문헌 기반 촉각 모델</small></div>
   </section>
   <nav class="tabs" aria-label="실험실 메뉴"><button class="active" data-tab="lab" aria-current="page">실험실</button><button data-tab="protocol">동현랭 조작 규약</button><button data-tab="science">모델과 출처</button><span>조작은 오직 동현랭으로</span></nav>

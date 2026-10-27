@@ -14,3 +14,6 @@
 
 /* 휴대폰 한 단: 빈 실험 기록이 자리를 비워 두지 않도록 내용만큼 늘다가 원래 높이에서 멈춘다 */
 @media(max-width:780px){.coding-column .log-panel ol{height:auto;max-height:130px}}
+
+/* 소개 문장은 단어 중간에서 끊지 않는다 */
+.intro p{word-break:keep-all}
