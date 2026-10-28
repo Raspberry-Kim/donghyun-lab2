@@ -269,7 +269,7 @@ a.series-item:focus-visible{outline:3px solid #a5791c;outline-offset:3px}
           <canvas id="arena" width="960" height="720" role="img" aria-label="왼쪽 라이언과 슈슈. 동현랭 명령으로 타격하고 촉각 회로 반응을 관찰한다."></canvas>
           <div class="arena-hud"><span>SPECIMEN 02<br><small><i>C. elegans</i> · 공개 연결망</small></span><span><span id="clock">0.00 s</span><small>모의 시간 · ⅓ 속도 재생</small></span></div>
           <div class="arena-floor"><span id="mode">출발 대기</span><span>640 × 480</span></div>
-          <div id="welcome" class="welcome"><div class="eyebrow">A LITTLE TOUCH, A LITTLE RESPONSE</div><h3>잽 / 앞쪽 촉각</h3><p>슈슈의 글러브에서 왼쪽 선충의 신경 반응까지, 코드 한 번으로 지켜보자.</p><button id="demo" disabled>실험 시작 ↗</button></div>
+          <div id="welcome" class="welcome"><div class="eyebrow">A LITTLE TOUCH, A LITTLE RESPONSE</div><h3>잽 / 앞쪽 촉각</h3><p>슈슈의 글러브에서 라이언(예쁜꼬마선충)의 신경 반응까지, 코드 한 번으로 지켜보자.</p><button id="demo" disabled>실험 시작 ↗</button></div>
         </div>
         <div class="legend"><span><i style="background:#ffac36"></i>앞쪽 감각</span><span><i style="background:#33d9ff"></i>뒤쪽 감각</span><span><i style="background:#ff4d9d"></i>후진 회로</span><span><i style="background:#c6f548"></i>전진 회로</span><span><i style="background:#bf85ff"></i>강한 촉각</span><span id="contact-count">0회 접촉</span></div>
         <div class="meters">
@@ -1722,7 +1722,7 @@ function codeChanged(e){if(!e?.isComposing)dhIndentCode();const n=$('#code').val
 function selectExample(){
   const ex=examples.find(e=>e.id===$('#example').value);$('#code').value=ex.code;$('#example-note').textContent=ex.note;codeChanged();
   $('#welcome h3').textContent=ex.title.slice(5);
-  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'슈슈의 글러브에서 왼쪽 선충의 신경 반응까지 지켜보자.';
+  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'슈슈의 글러브에서 라이언(예쁜꼬마선충)의 신경 반응까지 지켜보자.';
 }
 selectExample();$('#example').onchange=selectExample;$('#code').oninput=codeChanged;$('#code').onscroll=()=>$('#lines').scrollTop=$('#code').scrollTop;
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{

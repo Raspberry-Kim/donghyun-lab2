@@ -51,7 +51,7 @@ function codeChanged(e){if(!e?.isComposing)dhIndentCode();const n=$('#code').val
 function selectExample(){
   const ex=examples.find(e=>e.id===$('#example').value);$('#code').value=ex.code;$('#example-note').textContent=ex.note;codeChanged();
   $('#welcome h3').textContent=ex.title.slice(5);
-  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'슈슈의 글러브에서 왼쪽 선충의 신경 반응까지 지켜보자.';
+  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'슈슈의 글러브에서 라이언(예쁜꼬마선충)의 신경 반응까지 지켜보자.';
 }
 selectExample();$('#example').onchange=selectExample;$('#code').oninput=codeChanged;$('#code').onscroll=()=>$('#lines').scrollTop=$('#code').scrollTop;
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{
