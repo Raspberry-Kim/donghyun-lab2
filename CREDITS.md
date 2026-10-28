@@ -47,7 +47,7 @@
 
 복싱 동작은 실제 인물이나 영상 프레임을 따라 그리지 않은, 동현파만의 픽셀 애니메이션이다. 짧은 잽과 길게 뻗는 스트레이트, 낮은 자세의 바디블로우, 올라오는 어퍼컷과 원을 그리는 동작의 차이를 만화처럼 강조했다. 바디 펀치에서 무릎을 낮추고 몸통을 돌리는 모습은 [Evolve의 설명](https://evolve-mma.com/blog/5-things-you-should-know-about-body-shots-in-boxing/)과 [ExpertBoxing의 펀치 동작 설명](https://expertboxing.com/how-to-punch-harder)을 참고했다. 팔이 길게 늘어나고 주먹이 커지고, 주먹이 몸에 잠시 머무는 것은 모두 연출이다. 사람의 실제 생체역학이나 실전 기술을 보여 주려는 것은 아니다.
 
-- **동현파 코드와 그림:** MIT, Copyright (c) 2026 Kim Dong Hyun. 슈슈와 선충, 효과는 모두 코드로 새로 그렸다. 양쪽으로 묶은 머리는 흔한 헤어스타일일 뿐, 특정 상업 캐릭터를 따라 그린 것이 아니다.
+- **동현파 코드와 그림:** MIT, Copyright (c) 2026 Kim Dong Hyun. 슈슈와 라이언, 효과는 모두 코드로 새로 그렸다. 양쪽으로 묶은 머리는 흔한 헤어스타일일 뿐, 특정 상업 캐릭터를 따라 그린 것이 아니다.
 - **동현랭 v1.53 실행기:** MIT. 원 저작권과 전문은 `DONGHYUN-MIT.txt`에 있다.
 - **문서 변환기:** Marked 15.0.12. 빌드할 때만 쓴다. MIT 및 관련 고지는 `MARKED-MIT.txt`에 있다.
 - **글꼴:** Black Han Sans, Nanum Gothic Coding, Pretendard. SIL Open Font License 전문을 각 파일과 함께 넣었다.
