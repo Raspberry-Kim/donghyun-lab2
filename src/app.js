@@ -248,7 +248,7 @@ function draw(){
   ctx.strokeStyle=dark?'#c8b79238':'#baaa893f';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(87,442);ctx.lineTo(421,442);ctx.stroke();
   worm(s,dark);drawPixelGirl(ctx,s,punches,wormPoint,glovePath);
   const font=w<500?14:12;ctx.font=font+'px "Pretendard"';ctx.fillStyle=dark?'#d0c3ab':'#6e6356';ctx.textAlign='center';const sci=document.querySelector('.arena-hud>span:first-child small'),cr0=canvas.getBoundingClientRect(),wy=sci&&sci.offsetParent?Math.max(68,Math.ceil((sci.getBoundingClientRect().bottom-cr0.top)*640/cr0.width)+14):68; // mobile: keep the worm label below the italic C. elegans line
-  ctx.fillText('예쁜꼬마선충',180,wy);ctx.fillText('슈슈',352,237);ctx.restore();
+  ctx.fillText('라이언',180,wy);ctx.fillText('슈슈',352,237);ctx.restore();
   if(s.action&&s.action.progress<1){const hud=document.querySelector('.arena-hud>span:last-child'),cr=canvas.getBoundingClientRect(),ay=hud?Math.max(103,Math.ceil((hud.getBoundingClientRect().bottom-cr.top)*640/cr.width)+16):103; // mobile: keep the action label below the HTML clock
     ctx.fillStyle=dark?'#edd598':'#957044';ctx.font='13px "Nanum Gothic Coding"';ctx.fillText(s.action.name,490,ay);ctx.font='11px "Nanum Gothic Coding"';ctx.fillText('위치 '+Math.round(s.action.position*100)+'% · 세기 '+Math.round(s.action.power*100),490,ay+20);}
 }
