@@ -301,7 +301,7 @@ a.series-item:focus-visible{outline:3px solid #a5791c;outline-offset:3px}
     <div class="workflow"><span>동현랭 코드</span><b>→</b><span>슈슈의 기술</span><b>→</b><span>접촉·감각 입력</span><b>→</b><span>신경 활성</span><b>→</b><span>선충의 몸</span></div>
   </section>
   <section id="tab-protocol" class="tab-panel document" hidden>
-    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v1.02</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 가운데 슈슈의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
+    <div class="doc-heading"><div class="eyebrow">EXPERIMENT I/O · v1.02</div><h2>글러브에서 작은 신경계까지, 명령은 동현랭으로.</h2><p>버튼이나 방향키로 공격하지 않는다. 동현랭이 출력한 정수를 실험실이 읽고, 슈슈의 동작과 왼쪽 선충의 회로 계산을 같은 시간축에서 진행한다.</p></div>
     <div class="table-wrap"><table><thead><tr><th>명령</th><th>하는 일</th><th>인수</th></tr></thead><tbody>
       <tr><td>1</td><td>초기화</td><td>시드</td></tr>
       <tr><td>2</td><td>기술 시행</td><td>기술 번호 · 손(오른손 1 / 왼손 2) · 세기 0~100 · 접촉 위치 5~95%</td></tr>
@@ -1722,7 +1722,7 @@ function codeChanged(e){if(!e?.isComposing)dhIndentCode();const n=$('#code').val
 function selectExample(){
   const ex=examples.find(e=>e.id===$('#example').value);$('#code').value=ex.code;$('#example-note').textContent=ex.note;codeChanged();
   $('#welcome h3').textContent=ex.title.slice(5);
-  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'가운데 슈슈의 글러브에서 왼쪽 선충의 신경 반응까지 지켜보자.';
+  $('#welcome p').textContent=ex.id==='blank'?'시작과 끝 사이에 나만의 동현랭 연속기를 써 보자.':'슈슈의 글러브에서 왼쪽 선충의 신경 반응까지 지켜보자.';
 }
 selectExample();$('#example').onchange=selectExample;$('#code').oninput=codeChanged;$('#code').onscroll=()=>$('#lines').scrollTop=$('#code').scrollTop;
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{
