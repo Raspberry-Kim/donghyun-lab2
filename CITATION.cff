@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata below."
 title: "Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang"
 type: software
-version: "1.04"
+version: "1.05"
 date-released: "2026-11-03"
 doi: "10.5281/zenodo.23689488"
 authors:
