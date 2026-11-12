@@ -119,23 +119,23 @@ npm run build
 
 ## 인용과 보관본
 
-동현파를 인용할 때는 이번 판의 DOI [`10.5281/zenodo.24153323`](https://doi.org/10.5281/zenodo.24153323)를 쓰면 된다. 판과 상관없이 늘 최신판을 가리키려면 위 배지의 개념 DOI `10.5281/zenodo.23689488`을 쓰면 된다. 보관본 ZIP은 v1.08 태그와 같은 내용이다.
+동현파를 인용할 때는 이번 판의 DOI [`10.5281/zenodo.24159912`](https://doi.org/10.5281/zenodo.24159912)를 쓰면 된다. 판과 상관없이 늘 최신판을 가리키려면 위 배지의 개념 DOI `10.5281/zenodo.23689488`을 쓰면 된다. 보관본 ZIP은 v1.09 태그와 같은 내용이다.
 
-| 항목 | v1.08 보관본 |
+| 항목 | v1.09 보관본 |
 | --- | --- |
-| Zenodo 레코드 | [24153323](https://zenodo.org/records/24153323) |
-| DOI | `10.5281/zenodo.24153323` |
+| Zenodo 레코드 | [24159912](https://zenodo.org/records/24159912) |
+| DOI | `10.5281/zenodo.24159912` |
 | 개념 DOI(모든 판) | `10.5281/zenodo.23689488` |
 | 제목 | Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang |
-| 판 | v1.08 |
+| 판 | v1.09 |
 | 공개일 | 2026-11-12 |
 | 만든 사람 | Kim, Dong Hyun (Inha University College of Medicine, ORCID [0000-0001-9883-0229](https://orcid.org/0000-0001-9883-0229)) |
 | 자료 유형 | Software |
 | 라이선스(Zenodo 표기) | MIT. 연결 데이터는 아래 ‘출처와 이용 조건’대로 ODbL 1.0·DbCL 1.0을 따른다. |
-| 보관 파일 | `donghyun-lab2-v1.08.zip` (5,983,223바이트, MD5 `65d583990db48b6b87bf4d48cd8e06a5`) |
-| 관련 식별자 | [GitHub v1.08 태그](https://github.com/Raspberry-Kim/donghyun-lab2/tree/v1.08) (isSupplementTo) |
+| 보관 파일 | `donghyun-lab2-v1.09.zip` (5,984,545바이트, MD5 `0850f8f5d843a8b7f4c02648abcb00cc`) |
+| 관련 식별자 | [GitHub v1.09 태그](https://github.com/Raspberry-Kim/donghyun-lab2/tree/v1.09) (isSupplementTo) |
 
-[v1.08 릴리스](https://github.com/Raspberry-Kim/donghyun-lab2/releases/tag/v1.08)에서 바뀐 점을 볼 수 있다. 바로 앞 v1.07의 [Zenodo 보관본](https://zenodo.org/records/24152175)은 DOI `10.5281/zenodo.24152175`로 남아 있다.
+[v1.09 릴리스](https://github.com/Raspberry-Kim/donghyun-lab2/releases/tag/v1.09)에서 바뀐 점을 볼 수 있다. 앞선 v1.08의 [Zenodo 보관본](https://zenodo.org/records/24153323)은 DOI `10.5281/zenodo.24153323`으로, v1.07의 [Zenodo 보관본](https://zenodo.org/records/24152175)은 DOI `10.5281/zenodo.24152175`로 남아 있다.
 
 ## 출처와 이용 조건
 
