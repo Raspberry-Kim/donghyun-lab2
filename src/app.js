@@ -255,7 +255,7 @@ function draw(){
 function drawChart(){
   for(const sample of (allSamples.length?allSamples:samples))for(const key of Object.keys(colors))if(Number.isFinite(sample[key]))chartPeak=Math.max(chartPeak,sample[key]);
   const ymax=chartRange(chartPeak);chart.dataset.yMax=String(ymax);chart.dataset.peak=String(chartPeak);
-  const w=chart.getBoundingClientRect().width;if(w<1)return;const h=w<500?340:440,d=Math.min(devicePixelRatio||1,2);chart.width=Math.round(w*d);chart.height=Math.round(h*d);chart.style.height=h+'px';cc.setTransform(d,0,0,d,0,0);
+  const box=chart.getBoundingClientRect(),w=box.width;if(w<1)return;const h=document.body.classList.contains('dh-presenting')?box.height:w<500?340:440,d=Math.min(devicePixelRatio||1,2);chart.width=Math.round(w*d);chart.height=Math.round(h*d);chart.style.height=h+'px';cc.setTransform(d,0,0,d,0,0);
   const dark=document.documentElement.dataset.theme==='dark',left=48,right=w-16,top=24,bottom=h-34;cc.clearRect(0,0,w,h);cc.fillStyle=dark?'#201d18':'#fbf7ef';cc.fillRect(0,0,w,h);cc.font='11px "Nanum Gothic Coding"';cc.textAlign='right';
   for(let i=0;i<=4;i++){const y=ymax*i/4,yy=bottom-y/ymax*(bottom-top);cc.strokeStyle=dark?'#c4b18b22':'#dacfb666';cc.lineWidth=1;cc.beginPath();cc.moveTo(left,yy);cc.lineTo(right,yy);cc.stroke();cc.fillStyle=dark?'#bdb19c':'#6e6356';cc.fillText(y.toFixed(3),left-8,yy+4);}
   const end=Math.max(10000,state?.time||0),start=end-10000;
@@ -265,7 +265,7 @@ function drawChart(){
   cc.restore();
   $('#chart-scale').textContent='Y축 0–'+ymax.toFixed(2)+' a.u. · 자동 범위 · 실험 최대 '+chartPeak.toFixed(3);
 }
-window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'1.02',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
+window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'1.10',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
 $('#run').addEventListener('click',animate);$('#slow').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});

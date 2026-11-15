@@ -24,7 +24,7 @@ assert.equal(scope.chartRange(0),.1);assert.equal(scope.chartRange(.02),.1);asse
 console.log('PASS Automatic Y range covers low and high neural peaks');
 let previous=.1;for(let i=0;i<=1000;i++){const p=i/1000,r=scope.chartRange(p);assert(r>=p*1.15-1e-12);assert(r>=previous);previous=r;}
 console.log('PASS Every valid activation has at least 15% headroom and monotonic ranges');
-assert(source.includes('h=w<500?340:440'));assert(!source.includes('CHART_MAX'));assert(source.includes("chartPeak=0;drawChart()"));
+assert(source.includes("h=document.body.classList.contains('dh-presenting')?box.height:w<500?340:440"));assert(!source.includes('CHART_MAX'));assert(source.includes("chartPeak=0;drawChart()"));
 console.log('PASS Taller chart, no fixed cutoff, and new-run peak reset');
 assert(source.includes('gain=Math.min(1,s.rates[k]*VIEW_GAIN)'));
 console.log('PASS Activation-driven glow remains presentation-only');
