@@ -1,6 +1,8 @@
 const $=s=>document.querySelector(s),canvas=$('#arena'),ctx=canvas.getContext('2d'),chart=$('#chart'),cc=chart.getContext('2d');
 let worker,ready=false,busy=false,state=null,samples=[],allSamples=[],lastSource='',data=null,workerURL='',lastHit=0,audio=null,chartPeak=0;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* 장면의 동작은 내용이므로 운영체제의 ‘동작 줄이기’(윈도우 ‘애니메이션 효과’ 끔 등)를 따라 멈추지 않는다.
+   동작을 줄여 보려면 주소 끝에 ?motion=reduce 를 붙인다. */
+const reduced=new URLSearchParams(location.search).get('motion')==='reduce';
 const colors={anterior:'#bb681e',posterior:'#198799',reverse:'#bd3b76',forward:'#66851b',harsh:'#7c55ab'};
 const glowColors={anterior:'#ffac36',posterior:'#33d9ff',reverse:'#ff4d9d',forward:'#c6f548',harsh:'#bf85ff'};
 const fallback={time:0,hits:0,action:null,q:Array(19).fill(0),v:Array(19).fill(0),phase:0,contraction:0,mechanical:0,knockback:0,theatrics:0,impulse:0,lastPosition:.2,lastPower:0,contact:false,mode:'출발 대기',rates:{anterior:0,posterior:0,reverse:0,forward:0,harsh:0,active:0}};
