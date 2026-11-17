@@ -265,7 +265,7 @@ function drawChart(){
   cc.restore();
   $('#chart-scale').textContent='Y축 0–'+ymax.toFixed(2)+' a.u. · 자동 범위 · 실험 최대 '+chartPeak.toFixed(3);
 }
-window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:'1.10',time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
+window.render_game_to_text=()=>JSON.stringify({app:'동현파',version:($('.edition')?.firstChild?.textContent||'').trim().replace(/^v/,''),time:state?.time||0,busy,action:state?.action||null,rates:state?.rates||fallback.rates,hits:state?.hits||0,knockback:state?.knockback||0,theatrics:state?.theatrics||0,coordinates:'640×480, x right, y down; upright worm left, pixel girl center'});
 let ticking=false;function animate(){if(ticking)return;ticking=true;const frame=()=>{draw();if(busy&&!reduced)requestAnimationFrame(frame);else ticking=false;};requestAnimationFrame(frame);}
 $('#run').addEventListener('click',animate);$('#slow').addEventListener('click',animate);$('#demo').addEventListener('click',animate);
 new ResizeObserver(()=>{draw();drawChart();}).observe($('.observation'));document.fonts.ready.then(()=>{draw();drawChart();});
