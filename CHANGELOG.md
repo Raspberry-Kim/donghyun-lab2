@@ -1,5 +1,10 @@
 # 변경 내용
 
+## v1.16 · 2026-11-20
+- 바닥글 링크를 시리즈 공통 목록으로 맞춤. 동현랭 · 동현랭 GitHub · 동현파 GitHub · 다른 실험실 17곳(번호 순)을 한 묶음으로 둠. 이전에는 동현랭 · 동현랭 GitHub · 동현파 GitHub · 동현초와 따로 떨어진 동현테 링크뿐.
+- 바닥글 줄 간격을 동현전 이후와 같게(8px·20px) 하고, 링크 이름이 중간에서 줄바꿈되지 않게 함.
+- 모델·worker·자료·예제·전체화면 배치·옛 태그 보존.
+
 ## v1.15 · 2026-11-17
 - 오류 수정: 출처의 끊긴 링크 1건 교체. 바디 펀치 자세 참고 글(Evolve MMA ‘5 Things You Should Know About Body Shots In Boxing’)이 404로 바뀌어, 같은 곳의 ‘How To Set Up And Land A Perfect Liver Shot In Boxing’으로 바꿈. 무릎을 조금 굽히고 앞발을 축으로 몸통을 돌려 치는 설명이 실린 글. CREDITS.md와 화면의 출처 패널에 반영.
 - 모델·worker·자료·예제·화면 배치·옛 태그 보존.

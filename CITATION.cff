@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata below."
 title: "Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang"
 type: software
-version: "1.15"
-date-released: "2026-11-17"
+version: "1.16"
+date-released: "2026-11-20"
 doi: "10.5281/zenodo.23689488"
 authors:
   - family-names: Kim
@@ -14,11 +14,11 @@ license: MIT
 repository-code: "https://github.com/Raspberry-Kim/donghyun-lab2"
 url: "https://raspberry-kim.github.io/donghyun-lab2/"
 abstract: >-
-  Version 1.15 replaces one dead external reference in the credits (a boxing
-  body-punch article) with a live page from the same publisher. Version 1.14
-  kept the live scene animating at its ordinary rate when the operating
-  system reports reduced motion; motion can still be reduced by adding
-  ?motion=reduce to the address.
+  Version 1.16 brings the footer links in line with the rest of the Donghyun
+  series: Donghyun-lang, its repository, this repository and the seventeen
+  other laboratories now appear as one list in series order. Version 1.15
+  replaced one dead external reference in the credits (a boxing body-punch
+  article) with a live page from the same publisher.
   The simulation model, data and language semantics are unchanged.
   Donghyunpa is a browser-based, noncommercial educational laboratory in
   which a pixel-art boxer touches a cartoon nematode and the response is
