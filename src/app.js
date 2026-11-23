@@ -111,10 +111,14 @@ async function init(){
     $('#data-download').href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));
   }catch(e){status('불러오기 오류','error');$('#result').textContent=e.message;}
 }
+/* 소리 장치가 돌고 있지 않으면 다시 켠다. Safari는 탭을 바꾸거나 통화가 끝난 뒤 'interrupted'로 남는다. 화면 복귀로는 장치를 새로 만들지 않는다. */
+function wakeAudio(){if(!audio||audio.state==='running'||audio.state==='closed')return;try{const r=audio.resume();if(r&&r.catch)r.catch(()=>{});}catch(_){}}
+['pointerdown','keydown','touchend','click'].forEach(ev=>addEventListener(ev,wakeAudio,true));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)wakeAudio();});addEventListener('pageshow',wakeAudio);addEventListener('focus',wakeAudio);
 let prevRunCode=null,lastSeeds=[];
 function run(e){const slowRun=e===true;if(!ready||busy)return;dhSlowUI(slowRun);
   if(!ready||busy)return;lastSource=$('#code').value;allSamples=[];samples=[];chartPeak=0;drawChart();lastHit=0;busy=true;$('#welcome').hidden=true;status('실험 중','running');$('#result').textContent=slowRun?'동현랭 명령을 한 줄씩 천천히 실행하고 있다.':'동현랭 명령을 실행하고 있다.';controls();
-  const AC=window.AudioContext||window.webkitAudioContext;if(AC&&!audio)audio=new AC();if(audio?.state==='suspended')audio.resume().catch(()=>{});
+  const AC=window.AudioContext||window.webkitAudioContext;if(AC&&!audio)audio=new AC();wakeAudio();
   const repeat=lastSource===prevRunCode;prevRunCode=lastSource;
   worker.postMessage({type:'run',code:lastSource,slow:slowRun,repeat});
 }

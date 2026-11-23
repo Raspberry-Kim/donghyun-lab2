@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata below."
 title: "Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang"
 type: software
-version: "1.16"
-date-released: "2026-11-20"
+version: "1.17"
+date-released: "2026-11-23"
 doi: "10.5281/zenodo.23689488"
 authors:
   - family-names: Kim
@@ -14,7 +14,8 @@ license: MIT
 repository-code: "https://github.com/Raspberry-Kim/donghyun-lab2"
 url: "https://raspberry-kim.github.io/donghyun-lab2/"
 abstract: >-
-  Version 1.16 brings the footer links in line with the rest of the Donghyun
+  Version 1.17 resumes the audio device whenever it is not running, for
+  example after Safari interrupts it. Version 1.16 brought the footer links in line with the rest of the Donghyun
   series: Donghyun-lang, its repository, this repository and the seventeen
   other laboratories now appear as one list in series order. Version 1.15
   replaced one dead external reference in the credits (a boxing body-punch
