@@ -1,6 +1,6 @@
 # 동현파™ · donghyun-lab2
 
-## 전체화면 · v1.17
+## 전체화면 · v1.18
 
 ALM/AVM 등의 신경 활성 박스를 우측 상단에, 예제 이름·설명과 실행 결과를 좌측 하단에 표시한다. 전체화면은 밝은 화면으로 열린다. 달 아이콘은 플레이그라운드와 같은 통상의 밝은·어두운 테마로 전환한다. 빈 배경만 따로 바꾸는 방식은 사용하지 않는다. 진입할 때마다 밝은 화면으로 시작하며, 종료하면 진입 전 플레이그라운드의 테마로 돌아온다.
 
@@ -123,27 +123,27 @@ npm test
 npm run build
 ```
 
-`src/`나 Markdown 문서를 고친 뒤 빌드하면 루트의 `index.html`, `동현파-v판번호.html`(판 번호가 붙은 단일 파일, 지금은 `동현파-v1.10.html`), 분리 파일판 `dist/`가 새로 만들어진다. 생성된 HTML을 직접 고치면 다음 빌드에서 덮어써지니, 원본을 고치는 편이 좋다.
+`src/`나 Markdown 문서를 고친 뒤 빌드하면 루트의 `index.html`, `동현파-v판번호.html`(판 번호가 붙은 단일 파일, 지금은 `동현파-v1.18.html`), 분리 파일판 `dist/`가 새로 만들어진다. 생성된 HTML을 직접 고치면 다음 빌드에서 덮어써지니, 원본을 고치는 편이 좋다.
 
 ## 인용과 보관본
 
-이전 v1.09를 인용할 때는 그 판의 DOI [`10.5281/zenodo.24159912`](https://doi.org/10.5281/zenodo.24159912)를 쓰면 된다. 판과 상관없이 늘 최신판을 가리키려면 위 배지의 개념 DOI `10.5281/zenodo.23689488`을 쓰면 된다. 보관본 ZIP은 v1.09 태그와 같은 내용이다.
+이전 v1.17을 인용할 때는 그 판의 DOI [`10.5281/zenodo.24464332`](https://doi.org/10.5281/zenodo.24464332)를 쓰면 된다. 판과 상관없이 늘 최신판을 가리키려면 위 배지의 개념 DOI `10.5281/zenodo.23689488`을 쓰면 된다. 보관본 ZIP은 v1.17 태그와 같은 내용이다.
 
-| 항목 | v1.09 보관본 |
+| 항목 | v1.17 보관본 |
 | --- | --- |
-| Zenodo 레코드 | [24159912](https://zenodo.org/records/24159912) |
-| DOI | `10.5281/zenodo.24159912` |
+| Zenodo 레코드 | [24464332](https://zenodo.org/records/24464332) |
+| DOI | `10.5281/zenodo.24464332` |
 | 개념 DOI(모든 판) | `10.5281/zenodo.23689488` |
 | 제목 | Donghyunpa (동현파): an educational C. elegans touch-circuit laboratory controlled through the esoteric language Donghyun-lang |
-| 판 | v1.09 |
-| 공개일 | 2026-11-12 |
+| 판 | v1.17 |
+| 공개일 | 2026-11-23 |
 | 만든 사람 | Kim, Dong Hyun (Inha University College of Medicine, ORCID [0000-0001-9883-0229](https://orcid.org/0000-0001-9883-0229)) |
 | 자료 유형 | Software |
 | 라이선스(Zenodo 표기) | MIT. 연결 데이터는 아래 ‘출처와 이용 조건’대로 ODbL 1.0·DbCL 1.0을 따른다. |
-| 보관 파일 | `donghyun-lab2-v1.09.zip` (5,984,545바이트, MD5 `0850f8f5d843a8b7f4c02648abcb00cc`) |
-| 관련 식별자 | [GitHub v1.09 태그](https://github.com/Raspberry-Kim/donghyun-lab2/tree/v1.09) (isSupplementTo) |
+| 보관 파일 | `donghyun-lab2-v1.17.zip` (6,012,950바이트, MD5 `b59c7e2b216dfbc0cd352862467c8d63`) |
+| 관련 식별자 | [GitHub v1.17 태그](https://github.com/Raspberry-Kim/donghyun-lab2/tree/v1.17) (isSupplementTo) |
 
-[v1.09 릴리스](https://github.com/Raspberry-Kim/donghyun-lab2/releases/tag/v1.09)에서 바뀐 점을 볼 수 있다. 앞선 v1.08의 [Zenodo 보관본](https://zenodo.org/records/24153323)은 DOI `10.5281/zenodo.24153323`으로, v1.07의 [Zenodo 보관본](https://zenodo.org/records/24152175)은 DOI `10.5281/zenodo.24152175`로 남아 있다.
+[v1.17 릴리스](https://github.com/Raspberry-Kim/donghyun-lab2/releases/tag/v1.17)에서 바뀐 점을 볼 수 있다. 앞선 v1.16의 [Zenodo 보관본](https://zenodo.org/records/24386217)은 DOI `10.5281/zenodo.24386217`로, v1.15의 [Zenodo 보관본](https://zenodo.org/records/24299950)은 DOI `10.5281/zenodo.24299950`으로 남아 있다.
 
 ## 출처와 이용 조건
 
